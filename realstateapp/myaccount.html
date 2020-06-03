@@ -1,0 +1,385 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>HomeSpace &mdash; MY ACCOUNT </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediaelementplayer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
+    
+  
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+  </head>
+  <style type="text/css">
+  /* The grid: Three equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 50px;
+      text-align: center;
+      font-size: 25px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .containerTab {
+      padding: 20px;
+      color: white;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Closable button inside the image */
+    .closebtn {
+      float: right;
+      color: white;
+      font-size: 35px;
+      cursor: pointer;
+    }
+  </style>
+
+  <body style="height:100%;background-size:100% 100%;background-image:url({% static 'images\myaccountbackground.jpg' %});">
+  
+  <div class="site-loader"></div>
+  
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+    <div class="border-bottom bg-white top-bar">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-6 col-md-6">
+            <p class="mb-0">
+              <a href="#" class="mr-3"><span class="text-black fl-bigmug-line-phone351"></span> <span class="d-none d-md-inline-block ml-2">+2 102 3923 3922</span></a>
+              <a href="#"><span class="text-black fl-bigmug-line-email64"></span> <span class="d-none d-md-inline-block ml-2">info@domain.com</span></a>
+            </p>  
+          </div>
+          <div class="col-6 col-md-6 text-right">
+            <a href="#" class="mr-3"><span class="text-black icon-facebook"></span></a>
+            <a href="#" class="mr-3"><span class="text-black icon-twitter"></span></a>
+            <a href="#" class="mr-0"><span class="text-black icon-linkedin"></span></a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="site-navbar">
+        <div class="container py-1">
+          <div class="row align-items-center">
+            <div class="col-8 col-md-8 col-lg-4">
+              <h1><a href="\index\" class="h5 text-blue" style="font-size:25px;"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong> Shri Raj Property</strong></a></h1>
+            </div>
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-right text-md-right" role="navigation">
+
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li>
+                    <a href="\index\">Home</a>
+                  </li>
+                  <li class="has-children active">
+                    <a href="\properties\">Properties</a>
+                    <ul class="dropdown">
+                      <li><a href="#">Buy</a></li>
+                      <li><a href="#">Rent</a></li>
+                      <li><a href="#">Lease</a></li>
+                      <li class="has-children">
+                        <a href="#">Menu</a>
+                        <ul class="dropdown">
+                          <li><a href="#">Menu One</a></li>
+                          <li><a href="#">Menu Two</a></li>
+                          <li><a href="#">Menu Three</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="\blog\">My Blogs</a></li>
+                  <li><a href="\registration\">My Orders</a></li>
+                  <li><a class="w3-bar-item w3-button" style="background-color:orange;color:white;padding-right:10px;font-weight:bold;" href="\login\">Logout</a></li>
+                </ul>
+              </nav>
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-5" style="background-image:url({% static 'images/orangeback.jpg' %});">
+      <center>
+      <h1 style="color:black;margin-left:700px;font-weight:bold;padding-bottom:48px;">MY ACCOUNT</h1>
+      </center>
+    </div>
+    <div class="site-section site-section-sm bg-light">
+      <div class="container">
+        <div class="w3-panel w3-display-container"style="background-color:orange;box-shadow: 0 15px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);height:125px;width:100%;">
+          <span onclick="this.parentElement.style.display='none'"
+          class="w3-button w3-display-topright">X</span>
+          <h2 style="color:white;padding-top:25px;padding-left:10px;font-weight:bold;">Hi, {{ name|safe }}</h2>
+          <p style="color:white;font-size:30px;padding-bottom:25px;">Good to see you again!!</p>
+        </div>
+    <div style="padding-top:30px;" class="w3-bar">
+      <button class="w3-bar-item w3-button" style="color:white;font-size:20px; width:33.3%;background-color:black;">My Orders</button>
+      <button class="w3-bar-item w3-button " style="color:white;font-size:20px;width:33.3%;background-color:orange;">My Blogs</button>
+      <button class="w3-bar-item w3-button " style="color:white;font-size:20px;width:33.3%;background-color:black;">Extra Button</button>
+    </div>
+    </div>
+    </div>
+    <div style="padding-top:0px;" class="site-section">
+      <div class="container">
+        
+        <CENTER>
+          <div class="site-section-title">
+            <h2>My Profile</h2>
+          </div>
+        </CENTER>
+       <DIV style="background-image:url({% static 'images/card.jpg' %});background-size:100% 100%;width:80%;padding-right:20px;margin:0 auto;" class="row w3-panel w3-card-4 w3-round-large">
+        <DIV class="columm"> 
+          <img style=" margin-left:20px;margin-bottom:20px;height:225px;width:190px;align:left;padding-left:0px;padding-top:20px;" class="w3-card-4" src="{% static 'images\profile.jpg' %}" alt="Person">
+          <a style="width:190px;margin-left:20px;margin-bottom:20px;bacground-color:orange;" href="/openchangeaccountdetails/" class="w3-button w3-block w3-ripple w3-orange">Change Details</a>
+        </DIV>
+        <DIV class="columm">
+          
+          <P style="margin-bottom:0px;margin-top:20px;font-size:22px;padding-left:45px;color:white;"><i class="fa fa-user"></i> : {{ name|safe }}</P>
+
+          <P style="margin-bottom:0px;margin-top:10px;font-size:22px;padding-left:45px;color:white;"><i class="fa fa-envelope"></i> : {{ email|safe }}</P>
+
+          <P style="margin-bottom:0px;margin-top:10px;font-size:22px;padding-left:45px;color:white;"><i class="fa fa-map-marker"></i> : {{ address|safe }}</P>
+
+          <P style="margin-bottom:0px;margin-top:10px;font-size:22px;padding-left:45px;color:white;"><i class="fa fa-phone"></i> : {{ phone|safe }}</P>
+
+          </div>
+        </DIV>
+
+      </DIV>    
+        
+        </div>
+        </div>
+        
+        
+        <CENTER>
+          <div class="site-section-title">
+            <h2>My Blogs</h2>
+          </div>
+        </CENTER>
+        <!-- The grid: three columns -->
+  <div style="margin:0 auto;width:80%">
+    <div class="row">
+      <div class="column w3-panel w3-leftbar w3-border-orange w3-white" onclick="openTab('b1');" style="padding-top:5px;width:31%;height:100px;margin-bottom:20px;margin-right:20px;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2>Blog1</h2>
+        <P style="font-size:22px;">Your Blog Title Here</P>
+      </div>
+      <div class="column w3-panel w3-leftbar w3-border-orange w3-white" onclick="openTab('b2');" style="padding-top:0px;width:31%;height:100px;margin-bottom:20px;margin-right:20px;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2>Blog2</h2>
+        <P style="font-size:22px;">Your Blog Title Here</P>
+      </div>
+      
+      <div class="column w3-panel w3-leftbar w3-border-orange w3-white" onclick="openTab('b3');" style="padding-top:0px;width:31%;height:100px;margin-bottom:20px;margin-right:20px;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2>Blog3</h2>
+        <P style="font-size:22px;">Your Blog Title Here</P></div>
+      <div class="column w3-panel w3-leftbar w3-border-orange w3-white" onclick="openTab('b4');" style="padding-top:0px;width:31%;height:100px;margin-bottom:20px;box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+        <h2>Blog4</h2>
+        <P style="font-size:22px;">Your Blog Title Here</P></div>
+    </div>
+
+    <div id="b1" class="containerTab w3-round-large" style="margin-bottom:20px;display:none;background-color:orange;padding:0px 0px 0px 0px;">
+      <span onclick="this.parentElement.style.display='none'" class="closebtn" style="color:black;margin-right:20px;">x</span>
+      <div class="row">
+        <div class="column" style="margin:0px;">
+          <img src="{% static 'images/hero_bg_1.jpg' %}" style="width:300px;height:auto;border-style:solid;border-color:white;border-radius:20px;border-width:5px;">
+        </div>
+        <div class="column">
+          <h2 style="color:black;font-weight:bold;">Your Blog 1</h2>
+          <p style="color:black;font-size:18px;"><span class="icon-pencil"></span> Your Blog Body</p>
+          <p style="color:black;font-size:15px;"><span class="icon-calendar"></span> Time &amp; Date here....</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="b2" class="containerTab w3-round-large" style="margin-bottom:20px;display:none;background-color:orange;padding:0px 0px 0px 0px;">
+      <span onclick="this.parentElement.style.display='none'" class="closebtn"style="color:black;margin-right:20px;">x</span>
+      <div class="row">
+        <div class="column" style="margin:0px;">
+          <img src="{% static 'images/hero_bg_1.jpg' %}" style="width:300px;height:auto;border-style:solid;border-color:white;border-radius:20px;border-width:5px;">
+        </div>
+        <div class="column">
+          <h2 style="color:black;font-weight:bold;">Your Blog 2</h2>
+          <p style="color:black;font-size:18px;"><span class="icon-pencil"></span> Your Blog Body</p>
+          <p style="color:black;font-size:15px;"><span class="icon-calendar"></span> Time &amp; Date here....</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="b3" class="containerTab w3-round-large" style="margin-bottom:20px;display:none;background-color:orange;padding:0px 0px 0px 0px;">
+      <span onclick="this.parentElement.style.display='none'" class="closebtn"style="color:black;margin-right:20px;">x</span>
+      <div class="row">
+        <div class="column" style="margin:0px;">
+          <img src="{% static 'images/hero_bg_1.jpg' %}" style="width:300px;height:auto;border-style:solid;border-color:white;border-radius:20px;border-width:5px;">
+        </div>
+        <div class="column">
+          <h2 style="color:black;font-weight:bold;">Your Blog 3</h2>
+          <p style="color:black;font-size:18px;"><span class="icon-pencil"></span> Your Blog Body</p>
+          <p style="color:black;font-size:15px;"><span class="icon-calendar"></span> Time &amp; Date here....</p>
+        </div>
+      </div>
+    </div>
+    <div id="b4" class="containerTab w3-round-large" style="margin-bottom:20px;display:none;background-color:orange;padding:0px 0px 0px 0px;">
+      <span onclick="this.parentElement.style.display='none'" class="closebtn"style="color:black;margin-right:20px;">x</span>
+      <div class="row">
+        <div class="column" style="margin:0px;">
+          <img src="{% static 'images/hero_bg_1.jpg' %}" style="width:300px;height:auto;border-style:solid;border-color:white;border-radius:20px;border-width:5px;">
+        </div>
+        <div class="column">
+          <h2 style="color:black;font-weight:bold;">Your Blog 4</h2>
+          <p style="color:black;font-size:18px;"><span class="icon-pencil"></span> Your Blog Body</p>
+          <p style="color:black;font-size:15px;"><span class="icon-calendar"></span> Time &amp; Date here....</p>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+          
+    
+
+    <div class="site-section site-section-sm bg-primary">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h2 class="text-white">Wide Range of Properties Just For You</h2>
+            <p class="lead text-white-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+          </div>
+          <div class="col-md-4 text-center">
+            <a href="#" class="btn btn-outline-primary btn-block py-3 btn-lg">See Properties</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">About HomeSpace</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
+            </div>
+
+            
+            
+          </div>
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Navigations</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="\index\">Home</a></li>
+                  <li><a href="#">Buy</a></li>
+                  <li><a href="#">Rent</a></li>
+                  <li><a href="\properties\">Properties</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="\about\">About Us</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="\contact\">Contact Us</a></li>
+                  <li><a href="#">Terms</a></li>
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <h3 class="footer-heading mb-4">Follow Us</h3>
+
+                <div>
+                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                </div>
+
+            
+
+          </div>
+          
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;</script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/mediaelement-and-player.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+ <script type="text/javascript">
+  // Hide all elements with class="containerTab", except for the one that matches the clickable grid column
+  function openTab(tabName) {
+    var i, x;
+    x = document.getElementsByClassName("containerTab");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+  }
+  </script>   
+  </body>
+</html>
