@@ -47,14 +47,15 @@
         <div class="row align-items-center">
           <div class="col-6 col-md-6">
             <p class="mb-0">
-              <a href="#" class="mr-3"><span class="text-black fl-bigmug-line-phone351"></span> <span class="d-none d-md-inline-block ml-2">+2 102 3923 3922</span></a>
-              <a href="#"><span class="text-black fl-bigmug-line-email64"></span> <span class="d-none d-md-inline-block ml-2">info@domain.com</span></a>
+              <a href="#" class="mr-3"><span class="text-black fl-bigmug-line-phone351"></span> <span class="d-none d-md-inline-block ml-2">+917000596002</span></a>
+              <a href="#"><span class="text-black fl-bigmug-line-email64"></span> <span class="d-none d-md-inline-block ml-2">shrirajproperty00@gmail.com
+</span></a>
             </p>  
           </div>
           <div class="col-6 col-md-6 text-right">
-            <a href="#" class="mr-3"><span class="text-black icon-facebook"></span></a>
-            <a href="#" class="mr-3"><span class="text-black icon-twitter"></span></a>
-            <a href="#" class="mr-0"><span class="text-black icon-linkedin"></span></a>
+            <a href="https://www.facebook.com/Shri-Raj-Property-Solvation-102741251470674/" class="mr-3"><span class="text-black icon-facebook"></span></a>
+            <a href="https://twitter.com/ShriRajPropert1?s=08" class="mr-3"><span class="text-black icon-twitter"></span></a>
+   <!--         <a href="#" class="mr-0"><span class="text-black icon-linkedin"></span></a> -->
           </div>
         </div>
       </div>
@@ -122,6 +123,11 @@
             <form action="\user_login\" method="POST">{% csrf_token %}
               <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="text" name="email" placeholder="Email" style="border-radius:15px;" required>
               <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="password" name="pass" placeholder="Password" style="border-radius:15px;" required>
+
+              <div style="margin-top:10px; margin-bottom:10px;">
+                <div class="g-recaptcha" data-sitekey="6LfLJAAVAAAAAP7WsuVfUeNtEKaIpoKAI2XsnusV"></div>
+              </div>
+
               <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="submit" value="Logins" style="border-radius:15px;">
             </form>
             <a href="\user_forgot_pass\"><p style="color:white;font-size:20px;margin-top:70px;margin-bottom:10px;">Forget Password</p></a>
@@ -136,10 +142,10 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4">
-            <div class="mb-5">
+            <div class="mb-5"><!--
               <h3 class="footer-heading mb-4">About  Shri Raj Property</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe pariatur reprehenderit vero atque, consequatur id ratione, et non dignissimos culpa? Ut veritatis, quos illum totam quis blanditiis, minima minus odio!</p>
-            </div>
+            --></div>
 
             
             
@@ -160,9 +166,9 @@
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
                   <li><a href="\about\">About Us</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
+                  
                   <li><a href="\contact\">Contact Us</a></li>
-                  <li><a href="#">Terms</a></li>
+               
                 </ul>
               </div>
             </div>
@@ -174,10 +180,10 @@
             <h3 class="footer-heading mb-4">Follow Us</h3>
 
                 <div>
-                  <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
-                  <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
-                  <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
-                  <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                  <a href="https://www.facebook.com/Shri-Raj-Property-Solvation-102741251470674/" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="https://twitter.com/ShriRajPropert1?s=08" class="pl-3 pr-3"><span class="icon-twitter"></span></a> 
+                  <a href="https://www.instagram.com/p/CBAqSCXl83a/?igshid=s95z5aqdp52m" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+      <!--            <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>-->
                 </div>
 
             
@@ -214,6 +220,8 @@
   <script src="{% static 'js/aos.js' %}"></script>
 
   <script src="{% static 'js/main.js' %}"></script>
+
+  <script src='https://www.google.com/recaptcha/api.js'></script>
     
   </body>
 </html>

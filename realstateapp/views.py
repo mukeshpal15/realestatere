@@ -13,6 +13,8 @@ from django.contrib import messages
 import uuid
 import string
 from realstateapp.realutil import *
+import json
+import urllib
 
 def demo(request):
 	return render(request,'demo.html',{})
@@ -70,14 +72,20 @@ def index(request):
 def properties(request):
 	b=0
 	h=0
-	obj=agent_account.objects.all()
+	qs=allPropertyDataforproperty()
+	LA=request.GET.get('area')
+	PS=request.GET.get('status')
+	PR=request.GET.get('range')
+
 	try:
+
+
 		try:
 			n=request.session['user_id']
 			if user_account.objects.filter(user_id=n).get():
 				b=1
 				h=0
-				return render(request, 'properties.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h})
 			else:
 				b=1
 				return render(request, 'properties.html',{'obj': obj,})
@@ -86,11 +94,11 @@ def properties(request):
 			if agent_account.objects.filter(agent_id=a).get():
 				b=1
 				h=0
-				return render(request, 'properties.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h})
 			else:
-				return render(request, 'properties.html',{'obj': obj,})
+				return render(request, 'properties.html',{'obj': qs})
 	except Exception:
-		return render(request, 'properties.html',{'obj': obj,})	
+		return render(request, 'properties.html',{'obj': qs})	
 
 def blog(request):
 	b=0
@@ -216,15 +224,31 @@ def adminlogincheck(request):
 	if request.method=="POST":
 		e=request.POST.get('email')
 		p=request.POST.get('pass')
-		if e=="admin@homespace.com" and p=="1234":
-			request.session['user']=e
-			return redirect('/adminpannel/')
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		if result['success']:
+			if e=="admin@homespace.com" and p=="1234":
+				request.session['user']=e
+				return redirect('/adminpannel/')
+			else:
+				b1='''<script type="text/javascript">
+				alert("'''
+				b2='''");</script>'''
+				alert=b1+'Login Failed'
+				return render(request, 'adminlogin.html', {'alert':alert})
 		else:
-			b1='''<script type="text/javascript">
-			alert("'''
-			b2='''");</script>'''
-			alert=b1+'Login Failed'
-			return render(request, 'adminlogin.html', {'alert':alert})
+			return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/adminlogin/') </script>")
+					
 	else:
 		return redirect('/error/')
 def adminpannel(request):
@@ -407,6 +431,7 @@ def saveproperty(request):
 		bd=request.POST.get('beds')
 		bt=request.POST.get('baths')
 		gr=request.POST.get('garages')
+		f=request.POST.get('for')
 		p="P00"
 		x=1
 		pid=p+str(x)
@@ -425,7 +450,8 @@ def saveproperty(request):
 			Property_Garages=gr,
 			Property_Price=property_price,
 			Property_Category=c,
-			Property_BuiltYear=y
+			Property_BuiltYear=y,
+			Property_status=f
 			)
 		obj.save()
 		b1='''<script type="text/javascript">
@@ -454,6 +480,20 @@ def agent_signup(request):
 		status=u
 		randomString = uuid.uuid4().hex
 		p= randomString.lower()[0:8]
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		randomString = uuid.uuid4().hex
+		p= randomString.lower()[0:8]
 		if agent_account.objects.filter(email=e).exists():
 			message= 'User Already Exist'
 			return render(request,'registration.html',{'message':message})
@@ -471,58 +511,62 @@ def agent_signup(request):
 				uid=u+str(x)
 			x=int(x)
 			try:
-				subject='Mail From Shri Raj Property'
-				msg= ''' Hello sir,
+				if result['success']:
+					subject='Mail From Shri Raj Property'
+					msg= ''' Hello sir,
 
-		You are successfully registered, but your account is not active
-		please wait for the owner response 
+			You are successfully registered, but your account is not active
+			please wait for the owner response 
 
-		Thanks & Regards
-		Shri Raj Property''' 
-				
-
-				email = EmailMessage(subject, msg, to=[e])
-				email.send()
-
-				try:
-					sus='New Agent Register'
-
-					mess= ''' Hello sir,
-		This Person want to make your agent
-		detail of the person is here
-
-		''' "Name :"+n+ ('\n') +"Gender :"+g+ ('\n')+"email :"+e+ ('\n')+"Address :"+ad+ ('\n')+"City :"+c+('\n')+"Phone :"+ph+ ('\n')+"Aadhar No. :"+aa+ ('\n') +"Facebook Link :"+fb+ ('\n') +"Twitter Link :"+tw+ ('\n') +"LinkedIn Link :"+LI+'''
-
-				Thanks & Regards
-				Shri Raj Property''' 
-
-
+			Thanks & Regards
+			Shri Raj Property''' 
 					
-					email = EmailMessage(sus, mess, to=['testm1214@gmail.com'])
+
+					email = EmailMessage(subject, msg, to=[e])
 					email.send()
-					print('gooooo')
-					sv=agent_account(agent_id=uid,
-									name=n,
-									gender=g,
-									email=e,
-									address=ad,
-									city=c,
-									phone=ph,
-									aadhar=aa,
-									password=p,
-									facebook=fb,
-									twitter=tw,
-									linkedin=LI,
-									status=status,
-									agentpic=m
-									 )
-					sv.save()
-					print('hello')
-					message='You are successfully registered.'	
-					return render(request,'registration.html', {'message':message})
-				except Exception:
-					message='Fill The Form Again'	
-					return render(request,'registration.html', {'message':message})
+
+					try:
+						sus='New Agent Register'
+
+						mess= ''' Hello sir,
+			This Person want to make your agent
+			detail of the person is here
+
+			''' "Name :"+n+ ('\n') +"Gender :"+g+ ('\n')+"email :"+e+ ('\n')+"Address :"+ad+ ('\n')+"City :"+c+('\n')+"Phone :"+ph+ ('\n')+"Aadhar No. :"+aa+ ('\n') +"Facebook Link :"+fb+ ('\n') +"Twitter Link :"+tw+ ('\n') +"LinkedIn Link :"+LI+'''
+
+					Thanks & Regards
+					Shri Raj Property''' 
+
+
+						
+						email = EmailMessage(sus, mess, to=['testm1214@gmail.com'])
+						email.send()
+						print('gooooo')
+						sv=agent_account(agent_id=uid,
+										name=n,
+										gender=g,
+										email=e,
+										address=ad,
+										city=c,
+										phone=ph,
+										aadhar=aa,
+										password=p,
+										facebook=fb,
+										twitter=tw,
+										linkedin=LI,
+										status=status,
+										agentpic=m
+										 )
+						sv.save()
+						print('hello')
+						message='You are successfully registered.'	
+						return render(request,'registration.html', {'message':message})
+					except Exception:
+						message='Fill The Form Again'	
+						return render(request,'registration.html', {'message':message})
+				else:
+					return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/registration/') </script>")
+
 			except Exception:
 				message=' Enter Valid Mail Address'
 				return render(request,'registration.html', {'message':message})
@@ -679,7 +723,18 @@ def user_signup(request):
 		
 		randomString = uuid.uuid4().hex
 		p= randomString.lower()[0:8]
-
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		if user_account.objects.filter(email=e).exists():
 			message= 'User Already Exist'
 			return render(request,'userregistation.html',{'message':message})
@@ -706,19 +761,34 @@ def user_signup(request):
 		Thanks & Regards
 		Shri Raj Property''' 
 				
-
-				email = EmailMessage(subject, msg, to=[e])
-				email.send()
-				sv=user_account(user_id=uid, name=n, gender=g, email=e, address=ad, city=c, phone=ph,password=p)
-				sv.save()
-				message='You are successfully registered. password is send to your given mail account'	
-				return render(request,'userregistation.html', {'message':message})
+				if result['success']:
+					email = EmailMessage(subject, msg, to=[e])
+					email.send()
+					sv=user_account(user_id=uid, name=n, gender=g, email=e, address=ad, city=c, phone=ph,password=p)
+					sv.save()
+					message='You are successfully registered. password is send to your given mail account'	
+					return render(request,'userregistation.html', {'message':message})
+				else:
+					return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/userregistation/') </script>")
+				
 			except Exception:
 				message='Enter Valid Mail Address'
 				return render(request,'userregistation.html', {'message':message})
 @csrf_exempt
 def user_login(request):
 	if request.method=="POST":
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
 		b=0
 		h=0
 		e=request.POST.get('email')
@@ -731,9 +801,14 @@ def user_login(request):
 				b=1
 				break
 		if request.session.has_key('user_id') and b==1: 
-			h=1
-			dic=GetUserData(e)
-			return redirect('/useraccount/')
+			if result['success']:
+				h=1
+				dic=GetUserData(e)
+				return redirect('/useraccount/')
+			else:
+				return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/loginformuser/') </script>")
+
+
 		else:
 			message='Please Enter Valid Details'
 
@@ -757,12 +832,26 @@ def useraccount(request):
 
 @csrf_exempt
 def agent_login(request):
+
 	b=0
 	h=0
 	s='active'
 	e=request.POST.get('email')
 	p=request.POST.get('pass')
 	ua = agent_account.objects.filter(email=e)
+
+	''' Begin reCAPTCHA validation '''
+	recaptcha_response = request.POST.get('g-recaptcha-response')
+	url = 'https://www.google.com/recaptcha/api/siteverify'
+	values = {
+	    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+	    'response': recaptcha_response
+	}
+	data = urllib.parse.urlencode(values).encode()
+	req =  urllib.request.Request(url, data=data)
+	response = urllib.request.urlopen(req)
+	result = json.loads(response.read().decode())
+	''' End reCAPTCHA validation '''
 	if agent_account.objects.filter(email=e, password=p).exists():
 		if agent_account.objects.filter(status=s).exists():
 			for i in ua:
@@ -775,11 +864,14 @@ def agent_login(request):
 			message='Your account is not activated'
 			return render(request,'login.html',{'message': message})
 
-		if request.session.has_key('agent_id') and b==1: 
-			h=1
-			dic=getagentinfo(request.session['agent_id'])
-			dic.update({'blogs':getblogs(request.session['agent_id'])})
-			return render(request, 'agentdesk.html', dic)
+		if request.session.has_key('agent_id') and b==1:
+			if result['success']:
+				h=1
+				dic=getagentinfo(request.session['agent_id'])
+				dic.update({'blogs':getblogs(request.session['agent_id'])})
+				return render(request, 'agentdesk.html', dic)
+			else:
+				return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/login/') </script>")
 	else:
 		message='Please Enter valid details'
 		return render(request,'login.html',{'message': message})
@@ -790,29 +882,46 @@ def password_send_to_user(request):
 		e=request.POST.get('email')
 		randomString = uuid.uuid4().hex
 		p= randomString.lower()[0:8]
-		if user_account.objects.filter(email=e).exists():
-			u=user_account.objects.filter(email=e)
-			for i in u:
-				i.password=p
-				break
-			subject='Mail From Shri Raj Property'
-			msg= ''' Hello sir,
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		if result['success']:
+			if user_account.objects.filter(email=e).exists():
+				u=user_account.objects.filter(email=e)
+				for i in u:
+					i.password=p
+					break
+				subject='Mail From Shri Raj Property'
+				msg= ''' Hello sir,
 
-			Your passwaord has been changed, 
-			your password is :'''+p+''' 
+				Your passwaord has been changed, 
+				your password is :'''+p+''' 
 
-			Thanks & Regards
-			Shri Raj Property''' 
-					
-			try:
-				email = EmailMessage(subject, msg, to=[e])
-				email.send()
-				i.save()
-				return HttpResponse("<script> alert('Hello User, Your password has been sent to your registered Email. If you have not received the password, go to the contact page and send an email. Will be processed within 24 hours !!'); window.location.replace('/loginformuser/') </script>")
-			except Exception:
+				Thanks & Regards
+				Shri Raj Property''' 
+						
+				try:
+					email = EmailMessage(subject, msg, to=[e])
+					email.send()
+					i.save()
+					return HttpResponse("<script> alert('Hello User, Your password has been sent to your registered Email. If you have not received the password, go to the contact page and send an email. Will be processed within 24 hours !!'); window.location.replace('/loginformuser/') </script>")
+				except Exception:
+					return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/user_forgot_pass/') </script>")
+			else:
 				return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/user_forgot_pass/') </script>")
+
 		else:
-			return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/user_forgot_pass/') </script>")
+			return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/user_forgot_pass/') </script>")
+
 
 @csrf_exempt
 def password_send_to_agent(request):
@@ -820,29 +929,47 @@ def password_send_to_agent(request):
 		e=request.POST.get('email')
 		randomString = uuid.uuid4().hex
 		p= randomString.lower()[0:8]
-		if agent_account.objects.filter(email=e).exists():
-			u=agent_account.objects.filter(email=e)
-			for i in u:
-				i.password=p
-				break
-			subject='Mail From Shri Raj Property'
-			msg= ''' Hello sir,
+		''' Begin reCAPTCHA validation '''
+		recaptcha_response = request.POST.get('g-recaptcha-response')
+		url = 'https://www.google.com/recaptcha/api/siteverify'
+		values = {
+		    'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+		    'response': recaptcha_response
+		}
+		data = urllib.parse.urlencode(values).encode()
+		req =  urllib.request.Request(url, data=data)
+		response = urllib.request.urlopen(req)
+		result = json.loads(response.read().decode())
+		''' End reCAPTCHA validation '''
+		if result['success']:
+			if agent_account.objects.filter(email=e).exists():
+				u=agent_account.objects.filter(email=e)
+				for i in u:
+					i.password=p
+					break
+				subject='Mail From Shri Raj Property'
+				msg= ''' Hello sir,
 
-			Your passwaord has been changed, 
-			your password is :'''+p+''' 
+				Your passwaord has been changed, 
+				your password is :'''+p+''' 
 
-			Thanks & Regards
-			Shri Raj Property''' 
-					
-			try:
-				email = EmailMessage(subject, msg, to=[e])
-				email.send()
-				i.save()
-				return HttpResponse("<script> alert('Hello Agent, Your password has been sent to your registered Email. If you have not received the password, go to the contact page and send an email. Will be processed within 24 hours !!'); window.location.replace('/login/') </script>")
-			except Exception:
+				Thanks & Regards
+				Shri Raj Property''' 
+						
+				try:
+					email = EmailMessage(subject, msg, to=[e])
+					email.send()
+					i.save()
+					return HttpResponse("<script> alert('Hello Agent, Your password has been sent to your registered Email. If you have not received the password, go to the contact page and send an email. Will be processed within 24 hours !!'); window.location.replace('/login/') </script>")
+				except Exception:
+					return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/agent_forgot_pass/') </script>")
+			else:
 				return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/agent_forgot_pass/') </script>")
 		else:
-			return HttpResponse("<script> alert('Please Enter The Registered Email Address .!!'); window.location.replace('/agent_forgot_pass/') </script>")
+			return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/agent_forgot_pass/') </script>")
+
+
+
 
 def send_mail_by_contact(request):
 	if request.method=="POST":
@@ -886,10 +1013,10 @@ def Log(request):
 			if user_account.objects.filter(user_id=request.session['user_id']).get():
 				b=1
 				h=0
-				return render(request, 'index.html',{'obj': obj, 'b':b, 'h':h})
+				return redirect('/index/')
 			else:
 				b=1
-				return render(request, 'index.html',{'obj': obj,})
+				return redirect('/index/')
 		except Exception:
 			a=request.session['agent_id']
 			del request.session['agent_id']
@@ -897,12 +1024,12 @@ def Log(request):
 			if agent_account.objects.filter(agent_id=request.session['agent_id']).get():
 				b=1
 				h=0
-				return render(request, 'index.html',{'obj': obj, 'b':b, 'h':h})
+				return redirect('/index/')
 			else:
 				b=1
-				return render(request, 'index.html',{'obj': obj,})
+				return redirect('/index/')
 	except Exception:
-		return render(request, 'index.html',{'obj': obj,})
+		return redirect('/index/')
 
 			
 	
@@ -1089,10 +1216,14 @@ def orderdatasave(request):
 				uid=i.user_id
 				break;
 		except:
-			data=agent_account.objects.filter(agent_id=request.session['agent_id'])
-			for i in data:
-				uid=i.agent_id
-				break;
+			try:
+				data=agent_account.objects.filter(agent_id=request.session['agent_id'])
+				for i in data:
+					uid=i.agent_id
+					break;
+			except:
+				return HttpResponse("<script> alert('Your are not login !!'); window.location.replace('/index/') </script>")
+
 		o='OR00'
 		x=1
 		oid=o+str(x)
@@ -1282,6 +1413,7 @@ def proceedtopay(request):
 def app_charge(request):
 	dic={}
 	email=''
+	PID=''
 	razorpay_order_id = request.POST.get('razorpay_order_id')
 	razorpay_payment_id = request.POST.get('razorpay_payment_id')
 	razorpay_signature = request.POST.get('razorpay_signature')
@@ -1295,7 +1427,13 @@ def app_charge(request):
 			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
 			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Paid')
 			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
+			for j in obj1:
+				PID=j.Property_ID
+				break;
+			obj3=PropertyData.objects.filter(Property_ID=PID)
+			obj3.update(Property_status='SOLD')
 		obj.delete()
+
 		msg = '''Hi there!,
 Your payment for Cart ID '''+request.session['cartid']+'''is successful!
 Your Payment ID is '''+razorpay_payment_id+'''

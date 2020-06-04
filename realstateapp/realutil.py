@@ -63,7 +63,8 @@ def GetAllPropertyData():
 			'pname':x.Property_Name,
 			'pprice':x.Property_Price,
 			'pcategory':x.Property_Category,
-			'pyear':x.Property_BuiltYear}
+			'pyear':x.Property_BuiltYear,
+			'for':x.Property_status}
 		lt.append(dic)
 	return lt
 
@@ -90,7 +91,8 @@ def GetPropertyThumbData(category):
 		'area':x.Property_Area,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
-		'garages':x.Property_Garages
+		'garages':x.Property_Garages,
+		'for':x.Property_status
 		}
 		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
 		for y in obj1:
@@ -116,6 +118,7 @@ def GetPropertyData(pid):
 		'garages':x.Property_Garages,
 		'category':x.Property_Category,
 		'builtyear':x.Property_BuiltYear,
+		'for':x.Property_status,
 		'pricepersqft':str(float(x.Property_Price)/float(x.Property_Area))
 		}
 		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
@@ -234,6 +237,29 @@ def GetagentData2(uid):
 		}
 		break
 	return dic
+
+def allPropertyDataforproperty():
+	obj=PropertyData.objects.all()
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
 
 
 def GetCartCount(request):

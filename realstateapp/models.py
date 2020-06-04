@@ -21,6 +21,7 @@ class PropertyData(models.Model):
 	Property_Price=models.CharField(max_length=50)
 	Property_Category=models.CharField(max_length=100)
 	Property_BuiltYear=models.CharField(max_length=50)
+	Property_status=models.CharField(max_length=50, default='FOR SALE')
 	class Meta:
 		db_table="PropertyData"
 
