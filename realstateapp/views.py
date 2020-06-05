@@ -792,21 +792,21 @@ def user_login(request):
 		b=0
 		h=0
 		e=request.POST.get('email')
-		p=request.POST.get('password')
+		p=request.POST.get('pass')
 		ua = user_account.objects.filter(email=e)
-		if user_account.objects.filter(email=e, password=p).exists:
+		if user_account.objects.filter(email=e, password=p).exists():
 			for i in ua:
 				c=i.user_id
 				request.session['user_id']=c
 				b=1
 				break
-		if request.session.has_key('user_id') and b==1: 
-			if result['success']:
-				h=1
-				dic=GetUserData(e)
-				return redirect('/useraccount/')
-			else:
-				return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/loginformuser/') </script>")
+			if request.session.has_key('user_id') and b==1: 
+				if result['success']:
+					h=1
+					dic=GetUserData(e)
+					return redirect('/useraccount/')
+				else:
+					return HttpResponse("<script> alert(' Recaptcha is invalid !!'); window.location.replace('/loginformuser/') </script>")
 
 
 		else:
@@ -1193,13 +1193,85 @@ Shri Raj Property'''
 			e.send()
 			return render(request,"myaccount.html",dic)
 def openuserorder(request):
-	return render(request,'myorders.html',{})
+	lt=[]
+	dic={}
+	did=''
+	userid=''
+	agentid=''
+	tm=0
+	try:
+		obj1=user_account.objects.filter(user_id=request.session['user_id'])
+		for x in obj1:
+			userid=x.user_id
+			break
+		obj1=OrderData.objects.filter(Buyer_ID=userid)
+		for z in obj1:
+			obj=PropertyData.objects.filter(Property_ID=z.Property_ID)
+			obj2=PropertyImagesData.objects.filter(Property_ID=z.Property_ID)
+			for x in obj:
+				for y in obj2:
+					
+					dic={
+						'orderid':z.Order_ID,
+						'orderdate':z.Order_Date,
+						'status':z.Order_Status,
+						'name':x.Property_Name,
+						'category':x.Property_Category,
+						'price':x.Property_Price,
+						'address':x.Property_Address,
+						'area':x.Property_Area,
+						'buildyear':x.Property_BuiltYear,
+						'payment':z.Payment_ID,
+						'image':y.Property_Image.url,
+					}
+					tm=tm+int(x.Property_Price)
+				
+					lt.append(dic)
+		obj1=OrderData.objects.filter(Buyer_ID=userid)
+		obj1.update(Total_Amount=str(tm),
+			Amount_to_Pay=str(tm),
+			)
+		return render(request,'myorders.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+
+	except Exception:
+		obj1=agent_account.objects.filter(agent_id=request.session['agent_id'])
+		for x in obj1:
+			agentid=x.agent_id
+			break
+		obj1=OrderData.objects.filter(Buyer_ID=agentid)
+		for z in obj1:
+			obj=PropertyData.objects.filter(Property_ID=z.Property_ID)
+			obj2=PropertyImagesData.objects.filter(Property_ID=z.Property_ID)
+			for x in obj:
+				for y in obj2:
+					
+					dic={
+						'orderid':z.Order_ID,
+						'orderdate':z.Order_Date,
+						'status':z.Order_Status,
+						'name':x.Property_Name,
+						'category':x.Property_Category,
+						'price':x.Property_Price,
+						'address':x.Property_Address,
+						'area':x.Property_Area,
+						'buildyear':x.Property_BuiltYear,
+						'payment':z.Payment_ID,
+						'image':y.Property_Image.url,
+					}
+					tm=tm+int(x.Property_Price)
+				
+					lt.append(dic)
+		obj1=OrderData.objects.filter(Buyer_ID=agentid)
+		
+
+	return render(request,'myorders.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+	
 #############################################################################################################
 
 import razorpay
 #Working on Test Keys
 razorpay_client = razorpay.Client(auth=("rzp_test_30ncLAFfGjrh3N", "l6tOEr4l26jJqhTHwXhny0eX"))
-razorpay_client.set_app_details({"title" : "Printsathi", "version" : "1.0"})
+razorpay_client.set_app_details({"title" : "Srirajco", "version" : "1.0"})
 
 #############################################################################################################
 
@@ -1261,26 +1333,26 @@ def opencart(request):
 		obj1=OrderData.objects.filter(Buyer_ID=userid, Order_Status='Unpaid')
 		for z in obj1:
 			obj=PropertyData.objects.filter(Property_ID=z.Property_ID)
+			obj2=PropertyImagesData.objects.filter(Property_ID=z.Property_ID)
 			for x in obj:
-				dic={
-					'orderid':z.Order_ID,
-					'orderdate':z.Order_Date,
-					'status':z.Order_Status,
-					'name':x.Property_Name,
-					'category':x.Property_Category,
-					'price':x.Property_Price,
-					'address':x.Property_Address,
-					'area':x.Property_Area,
-					'buildyear':x.Property_BuiltYear,
-				}
-				tm=tm+int(x.Property_Price)
-				obj2=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
 				for y in obj2:
-					dic.update({
+					
+					dic={
+						'orderid':z.Order_ID,
+						'orderdate':z.Order_Date,
+						'status':z.Order_Status,
+						'name':x.Property_Name,
+						'category':x.Property_Category,
+						'price':x.Property_Price,
+						'address':x.Property_Address,
+						'area':x.Property_Area,
+						'buildyear':x.Property_BuiltYear,
+						'payment':z.Payment_ID,
 						'image':y.Property_Image.url,
-						
-						})
-				lt.append(dic)
+					}
+					tm=tm+int(x.Property_Price)
+				
+					lt.append(dic)
 		obj1=OrderData.objects.filter(Buyer_ID=userid,Order_Status='Unpaid')
 		obj1.update(Total_Amount=str(tm),
 			Amount_to_Pay=str(tm),
@@ -1295,26 +1367,26 @@ def opencart(request):
 		obj1=OrderData.objects.filter(Buyer_ID=agentid, Order_Status='Unpaid')
 		for z in obj1:
 			obj=PropertyData.objects.filter(Property_ID=z.Property_ID)
+			obj2=PropertyImagesData.objects.filter(Property_ID=z.Property_ID)
 			for x in obj:
-				dic={
-					'orderid':z.Order_ID,
-					'orderdate':z.Order_Date,
-					'status':z.Order_Status,
-					'name':x.Property_Name,
-					'category':x.Property_Category,
-					'price':x.Property_Price,
-					'address':x.Property_Address,
-					'area':x.Property_Area,
-					'buildyear':x.Property_BuiltYear,
-				}
-				tm=tm+int(x.Property_Price)
-				obj2=PropertyImagesData.objects.filter(Property_ID=z.Property_ID)
 				for y in obj2:
-					dic.update({
+					
+					dic={
+						'orderid':z.Order_ID,
+						'orderdate':z.Order_Date,
+						'status':z.Order_Status,
+						'name':x.Property_Name,
+						'category':x.Property_Category,
+						'price':x.Property_Price,
+						'address':x.Property_Address,
+						'area':x.Property_Area,
+						'buildyear':x.Property_BuiltYear,
+						'payment':z.Payment_ID,
 						'image':y.Property_Image.url,
-						
-						})
-				lt.append(dic)
+					}
+					tm=tm+int(x.Property_Price)
+				
+					lt.append(dic)
 		obj1=OrderData.objects.filter(Buyer_ID=agentid,Order_Status='Unpaid')
 		obj1.update(Total_Amount=str(tm),
 			Amount_to_Pay=str((tm*90)/100),
@@ -1343,7 +1415,7 @@ def deleteitem(request):
 		return HttpResponse("<script> alert('Sorry !, Order is not deleted'); window.location.replace('/opencart/') </script>")
  
 def proceedtopay(request):
-	try:
+	
 		try:
 			if user_account.objects.filter(user_id=request.session['user_id']).exists():
 				userid=''
@@ -1403,8 +1475,7 @@ def proceedtopay(request):
 			}
 			dic.update(razorpay_client.order.create(options))
 		return render(request,'proceedtopay.html', dic)
-	except:
-		return redirect('/agent_login/')
+	
 
 
 #Step 4
@@ -1414,6 +1485,7 @@ def app_charge(request):
 	dic={}
 	email=''
 	PID=''
+	oid=''
 	razorpay_order_id = request.POST.get('razorpay_order_id')
 	razorpay_payment_id = request.POST.get('razorpay_payment_id')
 	razorpay_signature = request.POST.get('razorpay_signature')
@@ -1422,6 +1494,7 @@ def app_charge(request):
     'razorpay_payment_id': razorpay_payment_id,
     'razorpay_signature': razorpay_signature}
 	if razorpay_client.utility.verify_payment_signature(params_dict):
+		print('hlo')
 		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
 		for x in obj:
 			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
@@ -1432,6 +1505,7 @@ def app_charge(request):
 				break;
 			obj3=PropertyData.objects.filter(Property_ID=PID)
 			obj3.update(Property_status='SOLD')
+		print('asdf')
 		obj.delete()
 
 		msg = '''Hi there!,
@@ -1448,18 +1522,18 @@ Srirajco.com'''
 		for x in obj:
 			email=x.email
 			break;
-		email = EmailMessage(sub, msg, to=email)
+		email = EmailMessage(sub, msg, to=[email])
 		email.send()
 		return render(request,'paymentsuccess.html',dic)
 	else:
 		obj=CartData.objects.filter(Cart_ID=request.session['cartid'])
 		for x in obj:
-			print(x.Order_ID)
+			oid=x.Order_ID
 			obj1=OrderData.objects.filter(Order_ID=x.Order_ID)
 			obj1.update(Payment_ID=razorpay_payment_id,Order_Status='Payment Failed')
 			dic={'cid':x.Cart_ID,'pid':razorpay_payment_id}
 		msg = '''Hi there!,
-Your payment for Order ID '''+request.session['order_id']+'''is failed!
+Your payment for Order ID '''+oid+'''is failed!
 Your Payment ID is '''+razorpay_payment_id+'''
 we apologize for this. Kindly send a mail to us regarding this problem.
 
@@ -1473,6 +1547,6 @@ Srirajco.com'''
 		for x in obj:
 			email=x.email
 			break;
-		email = EmailMessage(sub, msg, to=[request.session['user_email']])
+		email = EmailMessage(sub, msg, to=[email])
 		email.send()
 		return render(request,'paymentfailure.html',dic)

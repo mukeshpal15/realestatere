@@ -108,7 +108,7 @@
                   <li>
                     <a href="\index\">Home</a>
                   </li>
-                  <li><a href="/openuserorder/" class="active">My Orders</a></li>
+                  <li><a href="/opencart/" class="active">Cart</a></li>
                   <li><a class="w3-bar-item w3-button" style="background-color:orange;color:white;padding-right:10px;font-weight:bold;" href="\Log\">Logout</a></li>
                 </ul>
               </nav>
@@ -130,24 +130,34 @@
         <div class="row align-items-center">
           <table class="w3-table-all w3-hoverable" style="margin-bottom:50px;">
               <tr class="w3-black">
+                <th>Product</th>
                 <th>Order ID</th>
                 <th>Order Date</th>
                 <th>Property Name</th>
                 <th>Amount Paid</th>
                 <th>Transaction ID</th>
                 <th>Name of Payment Method</th>
-                <th>View Property Detail</th>
+                
               </tr>
             
+              {% for x in cartdata %}
               <tr>
-                <td>S2DFC</td>
-                <td>02/05/2020</td>
-                <td>Amar Vilas</td>
-                <td>Rs. 1000000/-</td>
-                <td>X1QF001</td>
-                <td>Debit Card</td>
-                <td><a href=""class="w3-button w3-block w3-ripple w3-orange" style="border-radius:20px;">Click Here</a></td>
+              <td>
+               <img style="height:100px;width:150px;border-radius:15px;" src="{{ x.image }}">
+            </td>
+                <td>{{ x.orderid }}</td>
+                <td>{{ x.orderdate }}</td>
+                <td>{{ x.name }}</td>
+                <td>Rs. {{x.price}} /-</td>
+                <td>{{x.payment}}</td>
+                
+                <td>{{ x.status }}</td>
+                
+            </td>
               </tr>
+
+            {% endfor %}  
+
               
             </table>
           </div>

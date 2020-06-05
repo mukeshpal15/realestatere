@@ -215,7 +215,7 @@ def GetUserData2(uid):
 			'address':x.address,
 			'city':x.city,
 			'phone':x.phone,
-			'pic':x.userpic.url,
+			'userpic':x.userpic.url,
 			
 		}
 		break
