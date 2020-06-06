@@ -3,6 +3,7 @@ from django.urls import path, include
 from realstateapp.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+import realstateapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -71,8 +72,13 @@ urlpatterns = [
     path('deleteitem/',deleteitem),
     path('proceedtopay/',proceedtopay),
     path('pay/',app_charge),
+    path('handler404/',handler404),
+    path('handler404/',handler500),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,
                               document_root=settings.MEDIA_ROOT)
+
+handler404 = realstateapp.views.handler404
+handler500 = realstateapp.views.handler500
