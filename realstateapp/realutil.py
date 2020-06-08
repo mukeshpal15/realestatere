@@ -64,7 +64,8 @@ def GetAllPropertyData():
 			'pprice':x.Property_Price,
 			'pcategory':x.Property_Category,
 			'pyear':x.Property_BuiltYear,
-			'for':x.Property_status}
+			'for':x.Property_status,
+			'location':x.Property_location}
 		lt.append(dic)
 	return lt
 
@@ -92,7 +93,8 @@ def GetPropertyThumbData(category):
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
-		'for':x.Property_status
+		'for':x.Property_status,
+		'location':x.Property_location
 		}
 		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
 		for y in obj1:
@@ -119,6 +121,7 @@ def GetPropertyData(pid):
 		'category':x.Property_Category,
 		'builtyear':x.Property_BuiltYear,
 		'for':x.Property_status,
+		'location':x.Property_location,
 		'pricepersqft':str(float(x.Property_Price)/float(x.Property_Area))
 		}
 		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
@@ -237,7 +240,7 @@ def GetagentData2(uid):
 		}
 		break
 	return dic
-
+##################################search bar#######################################
 def allPropertyDataforproperty():
 	obj=PropertyData.objects.all()
 	dic={}
@@ -252,7 +255,56 @@ def allPropertyDataforproperty():
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
-		'for':x.Property_status
+		'for':x.Property_status,
+		'location':x.Property_location,
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertyarea(area):
+	obj=PropertyData.objects.filter(Property_Area=area)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertystatus(status):
+	obj=PropertyData.objects.filter(Property_status=status)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
 		}
 		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
 		for y in obj1:
@@ -262,6 +314,343 @@ def allPropertyDataforproperty():
 	return lt
 
 
+def allPropertyDataforpropertyloaction(loaction):
+	obj=PropertyData.objects.filter(Property_location=loaction)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertybedrooms(bedrooms):
+	obj=PropertyData.objects.filter(Property_Beds=bedrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertybathrooms(bathrooms):
+	obj=PropertyData.objects.filter(Property_Baths=bathrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertyprice(price):
+	obj=PropertyData.objects.filter(Property_Price=price)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+
+#########for TWO
+
+def allPropertyDataforpropertyAS(area,status):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_status=status)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertyAL(area,loaction):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_location=loaction)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertyAB(area,bedrooms):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_Beds=bedrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertyABA(area,bathrooms):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_Baths=bathrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+def allPropertyDataforpropertyAPR(area,price):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_Price=price)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+###########TWO STATUS 
+
+
+def allPropertyDataforpropertySL(status,loaction):
+	obj=PropertyData.objects.filter(Property_status=status,Property_loaction=loaction)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertySBE(status,bedrooms):
+	obj=PropertyData.objects.filter(Property_status=status,Property_Beds=bedrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertySBA(status,bathrooms):
+	obj=PropertyData.objects.filter(Property_status=status,Property_Baths=bathrooms)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertySPR(status,price):
+	obj=PropertyData.objects.filter(Property_status=status,Property_Price=price)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertyall(area,status,loaction,bedrooms,bathrooms,price):
+	obj=PropertyData.objects.filter(Property_Area=area,Property_location=loaction,Property_status=status,Property_Beds=bedrooms,Property_Baths=bathrooms,Property_Price=price)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+
+###################################################################################################################
 def GetCartCount(request):
 	try:
 		try:

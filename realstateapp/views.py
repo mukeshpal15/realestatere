@@ -73,9 +73,50 @@ def properties(request):
 	b=0
 	h=0
 	qs=allPropertyDataforproperty()
-	LA=request.GET.get('area')
-	PS=request.GET.get('status')
-	PR=request.GET.get('range')
+	area=request.GET.get('area')
+	status=request.GET.get('status')
+	loaction=request.GET.get('loaction')
+	bedrooms=request.GET.get('bedrooms')
+	bathrooms=request.GET.get('bathrooms')
+	price=request.GET.get('range')
+
+	if area !='' and area is not None:
+		qs=allPropertyDataforpropertyarea(area)
+	elif status !='' and status is not None:
+		qs=allPropertyDataforpropertystatus(status)
+	elif loaction !='' and loaction is not None:
+		qs=allPropertyDataforpropertyloaction(loaction)
+	elif bedrooms !='' and bedrooms is not None:
+		qs=allPropertyDataforpropertybedrooms(bedrooms)
+	elif bathrooms !='' and bathrooms is not None:
+		qs=allPropertyDataforpropertybathrooms(bathrooms)
+	elif price !='' and price is not None:
+		qs=allPropertyDataforpropertyprice(price)
+
+		#two
+	elif status !='' and status is not None and area !='' and area is not None:
+		qs=allPropertyDataforpropertyAS(area,status)
+	elif loaction !='' and loaction is not None and area !='' and area is not None:
+		qs=allPropertyDataforpropertyAL(area,loaction)
+	elif bedrooms !='' and bedrooms is not None and area !='' and area is not None:
+		qs=allPropertyDataforpropertyAB(area,bedrooms)
+	elif bathrooms !='' and bathrooms is not None and area !='' and area is not None:
+		qs=allPropertyDataforpropertyABA(area,bathrooms)
+	elif price !='' and price is not None and area !='' and area is not None:
+		qs=allPropertyDataforpropertyAPR(area,price)
+
+	#TWO status
+	elif loaction !='' and loaction is not None or status !='' and status is not None:
+		qs=allPropertyDataforpropertySL(status,loaction)
+	elif bedrooms !='' and bedrooms is not None or status !='' and status is not None:
+		qs=allPropertyDataforpropertySBE(status,bedrooms)
+	elif bathrooms !='' and bathrooms is not None or status !='' and status is not None:
+		qs=allPropertyDataforpropertySBA(status,bathrooms)
+	elif price !='' and price is not None or status !='' and status is not None:
+		qs=allPropertyDataforpropertySPR(status,price)
+
+	elif area !='' and area is not None or loaction !='' and loaction is not None or status !='' and status is not None or bedrooms !='' and bedrooms is not None or bathrooms !='' and bathrooms is not None or price !='' and price is not None:
+		qs=allPropertyDataforpropertyall(area,status,loaction,bedrooms,bathrooms,price)
 
 	try:
 
@@ -432,6 +473,7 @@ def saveproperty(request):
 		bt=request.POST.get('baths')
 		gr=request.POST.get('garages')
 		f=request.POST.get('for')
+		city=request.POST.get('city')
 		p="P00"
 		x=1
 		pid=p+str(x)
@@ -451,7 +493,8 @@ def saveproperty(request):
 			Property_Price=property_price,
 			Property_Category=c,
 			Property_BuiltYear=y,
-			Property_status=f
+			Property_status=f,
+			Property_location=city
 			)
 		obj.save()
 		b1='''<script type="text/javascript">

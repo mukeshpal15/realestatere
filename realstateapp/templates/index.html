@@ -28,34 +28,50 @@
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-</style>
+    <!-- Bootstrap Dropdown Hover CSS -->
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/bootstrap-dropdownhover.min.css" rel="stylesheet">
+   
     
   </head>
   <body>
+  <!-- ###############################################################################################  -->
+
+<section >
+    <div id='popupmain' style="display: none; position: fixed;width: 0%;  z-index: 1001; float:right; height:0px; margin-top:55vh; margin-left:53vw">
+      <div id="qq" style="float:right; width: 15%;margin-top: 20%;">
+                <button  id='exit' onclick="document.getElementById('popupmain').style.display='none'" aria-hidden="true" 
+                style=" 
+    font-family: 'Nunito', sans-serif;
+   
+    text-transform: uppercase;
+   
+    
+    color: #313133;
+    background: #4dc47d;
+    background: linear-gradient(90deg, red 0%, #f5f5f5 100%);
+    border: none;
+    border-radius: 1000px;
+    box-shadow: 12px 12px 24px #f5f5f5;
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    margin-left: 43vw;
+    margin-top: 10px;
+       " value="X">x</button>
+                <img class="img-responsive" src="{% static 'images/dream.jpeg' %}" style="width:45vw; height:30vh;">
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- ###############################################################################################  -->
+
   
   <div class="site-loader"></div>
   
@@ -108,7 +124,7 @@
                     <a href="\index\">Home</a>
                   </li>
                   <li class="has-children">
-                    <a href="">Properties</a>
+                    <a href="\properties\">Properties</a>
                     <ul class="dropdown">
                       {% for x in cdata %}
                       <li><a href="/openpropertycategory/?cname={{ x.cname|safe }}">{{ x.cname|safe}}</a></li>
@@ -305,7 +321,7 @@
         </div>
       </div>
     </div>
-    <div class="site-section site-section-sm bg-primary" style="height:70vh;width:100%;background-size:100% 100%; background-image:url({% static 'images/dream.jpeg' %})">
+    <div class="site-section site-section-sm bg-primary" style="height:15em;width:100%;background-size:100% 100%; background-image:url({% static 'images/afterlogo1.png' %})">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-8">
@@ -382,6 +398,7 @@
               <span class="icon flaticon-house"></span>
               <h2 class="service-heading">Research Subburbs</h2>
               <p><span class="read-more"   >Learn More</span></p>
+
              <!-- <span class="tooltiptext">Tooltip text</span>-->
             </a>
           </div>
@@ -405,11 +422,15 @@
             </a>
           </div>
 
+
+
+
           <div class="col-md-6 col-lg-4 mb-4">
             <a href="#" class="service text-center border rounded">
               <span class="icon flaticon-house"></span>
               <h2 class="service-heading">Research Subburbs</h2>
               <p><span class="read-more">Learn More</span></p>
+               
             </a>
           </div>
           <div class="col-md-6 col-lg-4 mb-4">
@@ -591,6 +612,22 @@
   <script src="{% static 'js/aos.js' %}"></script>
 
   <script src="{% static 'js/main.js' %}"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Dropdown Hover JS -->
+    <script src="js/bootstrap-dropdownhover.min.js"></script>
+
+    <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#popupmain').css('display','block');},5000);
+
+  });
+</script>
 
     
   </body>
