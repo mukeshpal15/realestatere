@@ -126,20 +126,20 @@ def properties(request):
 			if user_account.objects.filter(user_id=n).get():
 				b=1
 				h=0
-				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h})
+				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h, 'cdata':GetPropertyCategoryData()})
 			else:
 				b=1
-				return render(request, 'properties.html',{'obj': obj,})
+				return render(request, 'properties.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 		except Exception:
 			a=request.session['agent_id']
 			if agent_account.objects.filter(agent_id=a).get():
 				b=1
 				h=0
-				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h})
+				return render(request, 'properties.html',{'obj': qs, 'b':b, 'h':h, 'cdata':GetPropertyCategoryData()})
 			else:
-				return render(request, 'properties.html',{'obj': qs})
+				return render(request, 'properties.html',{'obj': qs, 'cdata':GetPropertyCategoryData()})
 	except Exception:
-		return render(request, 'properties.html',{'obj': qs})	
+		return render(request, 'properties.html',{'obj': qs, 'cdata':GetPropertyCategoryData()})	
 
 def blog(request):
 	b=0
@@ -152,21 +152,21 @@ def blog(request):
 			if user_account.objects.filter(user_id=n).get():
 				b=1
 				h=0
-				return render(request, 'blog.html',{'obj': obj, 'b':b, 'h':h,'elt':dic})
+				return render(request, 'blog.html',{'obj': obj, 'b':b, 'h':h,'elt':dic,'cdata':GetPropertyCategoryData()})
 			else:
 				b=1
-				return render(request, 'blog.html',{'obj': obj, 'elt':dic})
+				return render(request, 'blog.html',{'obj': obj, 'elt':dic,'cdata':GetPropertyCategoryData()})
 		except Exception:
 			a=request.session['agent_id']
 			if agent_account.objects.filter(agent_id=a).get():
 				b=1
 				h=0
-				return render(request, 'blog.html',{'obj': obj, 'b':b, 'h':h, 'elt':dic})
+				return render(request, 'blog.html',{'obj': obj, 'b':b, 'h':h, 'elt':dic,'cdata':GetPropertyCategoryData()})
 			else:
-				return render(request, 'blog.html',{'obj': obj, 'elt':dic})
+				return render(request, 'blog.html',{'obj': obj, 'elt':dic,'cdata':GetPropertyCategoryData()})
 	except Exception:
 		
-		return render(request, 'blog.html',{'obj': obj, 'elt':dic})
+		return render(request, 'blog.html',{'obj': obj, 'elt':dic, 'cdata':GetPropertyCategoryData()})
 
 def about(request):
 	b=0
@@ -178,20 +178,20 @@ def about(request):
 			if user_account.objects.filter(user_id=n).get():
 				b=1
 				h=0
-				return render(request, 'about.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'about.html',{'obj': obj, 'b':b, 'h':h,'cdata':GetPropertyCategoryData()})
 			else:
 				b=1
-				return render(request, 'about.html',{'obj': obj,})
+				return render(request, 'about.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 		except Exception:
 			a=request.session['agent_id']
 			if agent_account.objects.filter(agent_id=a).get():
 				b=1
 				h=0
-				return render(request, 'about.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'about.html',{'obj': obj, 'b':b, 'h':h, 'cdata':GetPropertyCategoryData()})
 			else:
-				return render(request, 'about.html',{'obj': obj,})
+				return render(request, 'about.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 	except Exception:
-		return render(request, 'about.html',{'obj': obj,})
+		return render(request, 'about.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 
 def property_detail(request):
 	b=0
@@ -229,37 +229,37 @@ def contact(request):
 			if user_account.objects.filter(user_id=n).get():
 				b=1
 				h=0
-				return render(request, 'contact.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'contact.html',{'obj': obj, 'b':b, 'h':h, 'cdata':GetPropertyCategoryData()})
 			else:
 				b=1
-				return render(request, 'contact.html',{'obj': obj,})
+				return render(request, 'contact.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 		except Exception:
 			a=request.session['agent_id']
 			if agent_account.objects.filter(agent_id=a).get():
 				b=1
 				h=0
-				return render(request, 'contact.html',{'obj': obj, 'b':b, 'h':h})
+				return render(request, 'contact.html',{'obj': obj, 'b':b, 'h':h, 'cdata':GetPropertyCategoryData()})
 			else:
-				return render(request, 'contact.html',{'obj': obj,})
+				return render(request, 'contact.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 	except Exception:
-		return render(request, 'contact.html',{'obj': obj,})
+		return render(request, 'contact.html',{'obj': obj, 'cdata':GetPropertyCategoryData()})
 
 	
 def registration(request):
 
-	return render(request, 'registration.html', {})
+	return render(request, 'registration.html', {'cdata':GetPropertyCategoryData()})
 def login(request):
-	return render(request, 'login.html', {})
+	return render(request, 'login.html', {'cdata':GetPropertyCategoryData()})
 def adminlogin(request):
-	return render(request, 'adminlogin.html', {})
+	return render(request, 'adminlogin.html', {'cdata':GetPropertyCategoryData()})
 def agent_forgot_pass(request):
-	return render(request, 'agentforget.html', {})
+	return render(request, 'agentforget.html', {'cdata':GetPropertyCategoryData()})
 def userregistation(request):
-	return render(request, 'userregistation.html',{})
+	return render(request, 'userregistation.html',{'cdata':GetPropertyCategoryData()})
 def loginformuser(request):
-	return render(request, 'userlogin.html',{})
+	return render(request, 'userlogin.html',{'cdata':GetPropertyCategoryData()})
 def user_forgot_pass(request):
-	return render(request, 'userforgot.html', {})
+	return render(request, 'userforgot.html', {'cdata':GetPropertyCategoryData()})
 @csrf_exempt
 def adminlogincheck(request):
 	if request.method=="POST":
@@ -1435,7 +1435,7 @@ def opencart(request):
 			Amount_to_Pay=str((tm*90)/100),
 			)
 
-	return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
+		return render(request,'cart.html',{'cartcount':GetCartCount(request),'cartdata':lt,'totalamount':tm,'count':len(lt)})
 
 def deleteitem(request):
 	pid=request.GET.get('pname')
