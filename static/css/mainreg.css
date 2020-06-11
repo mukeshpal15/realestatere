@@ -232,7 +232,7 @@ h6 {
   padding: 0 33px;
   font-family: Poppins, Arial, "Helvetica Neue", sans-serif;
   cursor: pointer;
-  color: #fff;
+  color: white;
   -webkit-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
@@ -371,12 +371,12 @@ input {
 
 .input--style-3:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: #ccc;
+  color: white;
 }
 
 .input--style-3:-ms-input-placeholder {
   /* Microsoft Edge */
-  color: #ccc;
+  color: white;
 }
 
 /* ==========================================================================
