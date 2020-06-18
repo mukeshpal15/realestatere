@@ -1430,6 +1430,7 @@ def opencart(request):
 					tm=tm+int(x.Property_Price)
 				
 					lt.append(dic)
+					break;
 		obj1=OrderData.objects.filter(Buyer_ID=agentid,Order_Status='Unpaid')
 		obj1.update(Total_Amount=str(tm),
 			Amount_to_Pay=str((tm*90)/100),
