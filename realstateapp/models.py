@@ -74,8 +74,8 @@ class blog_table(models.Model):
 	blog_no = models.CharField(max_length=50)
 	pic_of_pro =models.ImageField(upload_to='blog_pic')
 	date = models.DateField(auto_now=True)
-	subject = models.CharField(max_length=60)
-	Desc = models.CharField(max_length=200)
+	subject = models.CharField(max_length=60, default='')
+	Desc = models.TextField()
 	class Meta:
 		db_table="blog_table"
 	
