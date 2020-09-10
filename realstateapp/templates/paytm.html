@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>paytem merchent payment ppage</title>
+</head>
+<body>
+<h1>Redirecting you to the merchant </h1>
+<h1>Please do not refresh the page</h1>
+
+<form action="https://securegw.paytm.in/order/process" method="post" name="paytm">
+	{% for key, value in dic.items %}
+	<input type="hidden" name="{{ key }}" value="{{ value }}">
+
+	{% endfor %}
+</form>
+</body>
+<script>
+document.paytm.submit()
+</script>
+</html>

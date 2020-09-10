@@ -4,6 +4,71 @@
   <head>
 
     <title> Shri Raj Property</title>
+    <style type="text/css">
+  .dropdown-large {
+  position: static !important;
+}
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+}
+.dropdown-menu-large > li > ul {
+  padding: 0;
+  margin: 0;
+}
+.dropdown-menu-large > li > ul > li {
+  list-style: none;
+}
+.dropdown-menu-large > li > ul > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333333;
+  white-space: normal;
+}
+.dropdown-menu-large > li ul > li > a:hover,
+.dropdown-menu-large > li ul > li > a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.dropdown-menu-large .disabled > a,
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  color: #999999;
+}
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  cursor: not-allowed;
+}
+.dropdown-menu-large .dropdown-header {
+  color: #428bca;
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+  .dropdown-menu-large > li {
+    margin-bottom: 30px;
+  }
+  .dropdown-menu-large > li:last-child {
+    margin-bottom: 0;
+  }
+  .dropdown-menu-large .dropdown-header {
+    padding: 3px 15px !important;
+  }
+}
+
+</style>
 
 
     <meta charset="utf-8">
@@ -34,14 +99,169 @@
     <!-- Bootstrap Dropdown Hover CSS -->
     <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap-dropdownhover.min.css' %}" rel="stylesheet">
-   
-   
+    <style>
+h1,h2,h3,h4,h5 {margin: 0;}
+.booknow-popup-sec { -webkit-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);-moz-box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);box-shadow: 0px 10px 20px 0px rgba(50, 50, 50, 0.52);}
+.booknow-popup-sec ul li button.submit-btn:focus, .booknow-popup-sec ul li input { outline: none; }
+.booknow-popup-sec { font-family: 'Montserrat', sans-serif; width: 713px; margin: 30px auto;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; box-sizing: border-box; position: relative; }
+.booknow-popup-sec h2 {margin: 0 0 30px 0;padding: 0 50px;letter-spacing: -0.4px;font-family: 'Montserrat', sans-serif;font-size: 24px;font-weight: 500;text-align: left;line-height: 35px;}
+.booknow-popup-sec h6 { font-family: 'Montserrat', sans-serif; text-align: center; text-transform: uppercase; font-size: 10px; letter-spacing: 0.6px; margin: 0 0 20px 0; padding: 0px; }
+.booknow-popup-sec ul { margin: 0px; padding: 0px 50px; float: left; width: 100%; list-style: none; box-sizing: border-box; }
+.booknow-popup-sec ul li { margin: 0; padding: 0px; float: left; width: 100%; }
+.booknow-popup-sec ul li input {font-family: 'Montserrat', sans-serif;font-size: 12px;letter-spacing: 1px; text-transform: uppercase; color: #a3a3a3;border: 1px solid lightgrey;margin: 0 0 30px 0px;padding: 18px;font-weight: 600;width: 100%;float: left;box-sizing: border-box;text-align: left;-webkit-box-shadow: 0 5px 5px 0 rgba(0,0,0,0.37);box-shadow: 0 5px 5px 0 rgba(0,0,0,0.37);}
+.booknow-popup-sec ul li button.submit-btn { -webkit-box-shadow: 0 5px 5px 0 rgba(0,0,0,0.37); box-shadow: 0 5px 5px 0 rgba(0,0,0,0.37); cursor: pointer; border: 0px; margin: 0 0 20px 0; width: 100%; padding: 15px 0; font-family: 'Montserrat', sans-serif; font-size: 14px;font-weight: 600;text-transform: uppercase;color: #fff; text-shadow: 0px 1px 0 rgba(0, 0, 0, 0.31); background: #8cc63f; background: -moz-linear-gradient(top, #8cc63f 0%, #00ae4d 99%); background: -webkit-linear-gradient(top, #8cc63f 0%, #00ae4d 99%); background: linear-gradient(to bottom, #8cc63f 0%, #00ae4d 99%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8cc63f', endColorstr='#00ae4d', GradientType=0 );
+}
+.booknow-popup-sec ul li button.submit-btn:hover { background: #00ae4d;}
+.booknow-popup-sec .booknow-popup-clsbtn { font-size: 14px; line-height: 18px; width: 28px; height: 28px; -webkit-border-radius: 50%; border-radius: 50%; background: #FFF; position: absolute; right: -14px; top: -14px; border: 0px; -webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,0.27); box-shadow: 0 5px 5px 0 rgba(0,0,0,0.27); cursor: pointer;}
+.booknow-popup-sec .booknow-popup-clsbtn:hover {color: #fff; background: #76d54a;}
+.booknow-popup-sec ul li button.submit-btn:hover { background: #00ae4d;}
+.popup-graybox {position: fixed;width: 100%;top: 0;left: 0;height: 100vh;z-index: 99999;text-align: center;align-items: center;display: flex;box-sizing: border-box;overflow: auto;}
+.booknow-popup-sec .booknow-popup-clsbtn {font-size: 14px;line-height: 18px;width: 28px;height: 28px;-webkit-border-radius: 50%;border-radius: 50%;background: #FFF;position: absolute;right: -14px;top: -14px;border: 0px;-webkit-box-shadow: 0 0 2px 0 rgba(0,0,0,0.27);box-shadow: 0 5px 5px 0 rgba(0,0,0,0.27);cursor: pointer;}
+.left_side {width: 40%;float: left;height: 438px;background: #0000ff;}
+.left_side h1 {color: #ffffff;font-size: 100px;font-weight: 800;text-transform: uppercase;}
+.booknow-popup-sec h2 span {color: #39b54a;font-weight: 700;}
+.left_side h3 {color: #fff; font-size: 36px;font-weight: 800;text-transform: uppercase;letter-spacing: 4px;}
+.right_side {width: 60%;float: left;height: 438px;background: #fff;}
+.content1 {padding: 76px 0;}
+.content2 {padding: 36px 0;}
+.booknow-popup-sec img {padding-bottom: 15px;}
+    
+@media only screen and (max-width:815px) {
+.booknow-popup-sec { width: 80%; }
+.booknow-popup-sec h2 {font-size: 22px;line-height: 30px;margin: 0 0 20px 0;}
+.booknow-popup-sec ul li input {font-size: 12px;letter-spacing: 0.5px;margin: 0 0 15px 0px;padding: 12px;font-weight: 500;}
+.booknow-popup-sec ul li button.submit-btn {font-size: 12px;}
+.left_side h1 {font-size: 52px;}
+.left_side h3 {font-size: 20px;letter-spacing: 1px;}
+.booknow-popup-sec img {padding-bottom: 10px;width: 30%;}
+.left_side {height: 365px;}
+.right_side {height: 365px;}
+.content1 {padding: 68px 0;}
+.content2 {padding: 38px 0;}
+.right_side {width: 100%;height: 335px;}
+.content2 {padding: 23px 0;}
+.booknow-popup-sec img {width: 10%;padding-bottom: 0;}
+.content1 {padding: 20px 0;}
+.left_side {width: 100%;height: 192px;}
+}
+@media only screen and (max-width:480px) {
+.left_side h1 {font-size: 42px;}
+.booknow-popup-sec h2 {font-size: 16px;line-height: 25px;}
+.left_side h3 {font-size: 15px;}
+.right_side {height: 290px;}
+.booknow-popup-sec { padding: 30px 10px;}
+.booknow-popup-sec { width: 95%;}
+.booknow-popup-sec ul li button.submit-btn {font-size: 12px;letter-spacing: 0.5px;padding: 15px 0;}
+.booknow-popup-sec ul li input {font-size: 12px;margin: 0 0 12px 0px;padding: 12px;}
+.booknow-popup-sec h2,.booknow-popup-sec ul {padding: 0 20px;}
+.left_side {height: 154px;}
+}
+@media only screen and (max-width:375px) {
+.booknow-popup-sec h6 { line-height: 22px; font-weight: normal;}
+}
+</style>
+<style>
+
+
+@media screen and (min-width: 601px) {
+  .lo {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lo {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  .booknow-popup-sec img  {
+    
+    width: 17%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .play  {
+  
+    width: 5vw;
+  }
+}
+</style>
+
+<style>
+body {margin:0;height:2000px;}
+
+.icon-bar {
+  float: right;
+  z-index: 9;
+  position: fixed;
+  top: 75%;
+  margin-left:93%;
+
+
+  
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 8px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+  opacity: 9999;
+  border-radius: 50%;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.facebook {
+  background:black;
+  color: white;
+}
+@media screen and (max-width: 600px) {
+  .icon-bar {
+    z-index: 9;
+    margin-left:82%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .icon-bar {
+    z-index: 9;
+    margin-left:82%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .icon-bar  {
+    z-index: 9;
+    margin-left:82%;
+  }
+}
+</style>
   </head>
   <body>
-  <!-- ###############################################################################################  -->
+  <!-- ############################################################################################### -->  
 
+  <div class="icon-bar" style="float: right;">
+ 
+  <a href="https://play.google.com/store/apps/details?id=com.shriraj.neonamart" class="facebook"><i><img src="http://www.userlogos.org/files/logos/jumpordie/google_play_04.png" style="width:40px ; padding-bottom: 0px;"></i></a>
+
+ 
+</div>
+<!--
 <section >
-    <div id='popupmain' style="display: none; position: fixed;width: 0%;  z-index: 1001; float:right; height:0px; margin-top:55vh; margin-left:53vw">
+    <div id='popupmain' style="display: none; position: fixed;width: 0%;  z-index: 1001; float:right; height:0px; margin-top:55vh; margin-left:75vw">
       <div id="qq" style="float:right; width: 15%;margin-top: 20%;">
                 <button  id='exit' onclick="document.getElementById('popupmain').style.display='none'" aria-hidden="true" 
                 style=" 
@@ -60,17 +280,69 @@
     cursor: pointer;
     outline: none;
     position: relative;
-    margin-left: 43vw;
+    margin-left: 20vw;
     margin-top: 10px;
        " value="X">x</button>
-                <img class="img-responsive" src="{% static 'images/dream.jpeg' %}" style="width:45vw; height:30vh;">
+             
+                <img class="img-responsive" src="{% static 'images/dream.jpeg' %}" style="width:20vw; height:30vh;">
+             
       </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
+<!-- ###################### popup ######################################### -->
+{% if g == k %}
+
+{% else %}
+
+<div class="popup-graybox" id='popupmainto' >
+<section class="booknow-popup-sec" style="margin-top: 14vh;">
+ <div class="left_side">
+    <div class="content1">
+      {% for i in bnnr %}
+        <img src="{{ i.offer.url }}" alt=""  style="height:27vh;   width: 100%;">
+      {% endfor %}
+        <h1 data-edit="text">get</h1>
+        <h3 data-edit="text">started</h3>
+    </div>
+ </div>
+ 
+<div class="right_side">
+    <div class="content2">
+     <h2 data-edit="text">Enter Phone number for offer <span></span></h2>
+     <form action="\foroffr\" method="POST">
+     <ul>
+       <li>
+         <input type="text" name="email" placeholder="enter your Phone number" data-edit="placeholder" r>
+       </li>
+       <li>
+         <button class="submit-btn" type="submit">submit</button>
+       </li>
+     </ul>
+     </form>
+     <ul>
+        <li>
+           <button class="submit-btn" type="submit" onclick="document.getElementById('popupmainto').style.display='none'">no thanks</button>
+           <a href="https://play.google.com/store/apps/details?id=com.shriraj.neonamart" class="btn  btn-lg" data-wow-duration="2s" data-wow-delay="0.2s"  style=" background-color: black; color: white; visibility: visible; animation-duration: 2s; animation-delay: 0.2s;  animation-name: fadeInLeft;"> <img src="http://www.userlogos.org/files/logos/jumpordie/google_play_04.png" class="play" style="width: 18%; padding-bottom: 0px;"> Download App<br></a></li>
+           
+            
+        </li>
+      </ul>
+  </div>
+</div>
+  
+   <a href="/demo/"> <button class="booknow-popup-clsbtn close-btn close-btn" >X</button></a>
+     
+      
+
+</section>    
+</div>
+ {% endif %}
+  
 
     <!-- #####################################call##########################################################  -->
+ 
 
 <section >
     <div id='call' style="display: none; position: fixed;width: 0%; margin-right: 0px; z-index: 1001; float:right; height:0px; margin-top:87vh; margin-left:96vw">
@@ -81,6 +353,7 @@
       </div>
     </div>
   </section>
+  
 
 
 
@@ -129,9 +402,9 @@
     <div class="site-navbar">
         <div class="container py-1">
           <div class="row align-items-center">
-            <div class="col-8 col-md-8 col-lg-4">
+            <div class="col-8 col-md-8 col-lg-4" style="padding-right: 0px;">
               
-              <h1><a href="\index\" class="h5 text-blue" style="font-size:25px;"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong> Shri Raj Property</strong></a></h1>
+              <h1><a href="\index\" class="h5 text-blue" ><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong class="lo">Shri Raj Property</strong></a></h1>
             </div>
             <div class="col-4 col-md-4 col-lg-8">
               <nav class="site-navigation text-right text-md-right" role="navigation">
@@ -144,15 +417,47 @@
                   </li>
 
                   <li class="has-children">
-                    <a href="\properties\"> All Properties</a>
-                    <ul class="dropdown">
-                      {% for x in cdata %}
-                      <li><a href="/openpropertycategory/?cname={{ x.cname|safe }}">{{ x.cname|safe}}</a></li>
-                      {% endfor %}
-                    </ul>
+                    <a>Services</a>
+                    <ul class="dropdown dropdown-menu-large row" style="width: max-content;">
+          <li class="col-sm-3">
+            <ul>              
+              <li class="dropdown-header">Finance</li>
+              <li><a href="/loan/">Home Loan</a></li>
+              <li><a href="/loan/">Personal Loan</a></li>
+              <li><a href="/loan/">Mortgage Loan</a></li>
+              
+            </ul>
+          </li>
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header">Material</li>
+              <li><a href="/matarial/">Material</a></li>
+              <li><a href="/matarial/">Laver</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Map</li>
+              <li><a href="/mapaproval/">Map Approval</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Diversion</li>
+              <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+              <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+              <li><a href="/properties/?cname=Residency"">Residency</a></li>
+            </ul>
+          </li>
+          
+          <li class="col-sm-3">
+            <ul>
+                <li class="dropdown-header">Category</li>
+              {% for x in cdata %}
+                <li><a href="/openpropertycategory/?cname={{ x.cname|safe }}">{{ x.cname|safe}}</a></li>
+              {% endfor %}
+              
+            </ul>
+          </li>
+        </ul>
                   </li>
+                  
+                  <li> <a href="/properties/">Properties</a></li>
                   <li><a href="\blog\">Blog</a></li>
-                  <li><a href="\about\">About</a></li>
                   <li><a href="\contact\">Contact</a></li>
                   {% if b == h %}
                   <li class="has-children">
@@ -203,154 +508,17 @@
 
 
     </div>
-<!--
-    <div class="py-5">
-      <div class="container">
-        <form class="row mb-5">
-          
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Lot Area</option>
-                <option value="1000">1000</option>
-                <option value="800">800</option>
-                <option value="600">600</option>
-                <option value="400">400</option>
-                <option value="200">200</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Property Status</option>
-                <option value="For Sale">For Sale</option>
-                <option value="For Rent">For Rent</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Location</option>
-                <option value="United States">United States</option>
-                <option value="United Kingdom">United Kingdom</option>
-                <option value="Canada">Canada</option>
-                <option value="Belgium">Belgium</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Lot Area</option>
-                <option value="1000">1000</option>
-                <option value="800">800</option>
-                <option value="600">600</option>
-                <option value="400">400</option>
-                <option value="200">200</option>
-                <option value="100">100</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Bedrooms</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5+">5+</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="select-wrap">
-              <span class="icon icon-arrow_drop_down"></span>
-              <select name="offer-types" id="offer-types" class="form-control d-block rounded-0">
-                <option value="">Bathrooms</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5+">5+</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <div class="mb-4">
-              <div id="slider-range" class="border-primary"></div>
-              <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-            </div>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-            <input type="submit" class="btn btn-primary btn-block form-control-same-height rounded-0" value="Search">
-          </div>
-          
-        </form>
-
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
-            <div class="feature d-flex align-items-start">
-              <span class="icon mr-3 flaticon-house"></span>
-              <div class="text">
-                <h2 class="mt-0">Wide Range of Properties</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit rem sint debitis porro quae dolorum neque.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
-            <div class="feature d-flex align-items-start">
-              <span class="icon mr-3 flaticon-rent"></span>
-              <div class="text">
-                <h2 class="mt-0">Rent or Sale</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit rem sint debitis porro quae dolorum neque.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-3 mb-lg-0">
-            <div class="feature d-flex align-items-start">
-              <span class="icon mr-3 flaticon-location"></span>
-              <div class="text">
-                <h2 class="mt-0">Property Location</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit rem sint debitis porro quae dolorum neque.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
-
-    <div class="site-section site-section-sm bg-primary" style="height:250px;width:100%;background-size:100% 100%;background-image:url({% static 'images/pexels-photo-276514.jpeg' %})">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <h2 class="text-white"></h2>
-            <p class="lead text-white-5"></p>
-          </div>-->
-    <!--      <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-outline-primary btn-block py-3 btn-lg">Action Button</a>
-          </div>-->
-        </div>
-      </div>
-    </div>
- <!--   <div class="site-section site-section-sm bg-primary" style="height:15em;width:100%;background-size:100% 100%; background-image:url({% static 'images/afterlogo1.png' %})">-->
+ 
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-8">
             <h2 class="text-white"></h2>
             <p class="lead text-white-5"></p>
           </div>
-    <!--      <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-outline-primary btn-block py-3 btn-lg">Action Button</a>
-          </div>-->
+   
         </div>
       </div>
     </div>
@@ -395,10 +563,32 @@
             <h2 class="text-white"></h2>
             <p class="lead text-white-5"></p>
           </div>
-    <!--      <div class="col-md-4 text-center">
-            <a href="#" class="btn btn-outline-primary btn-block py-3 btn-lg">Action Button</a>
-          </div>-->
+
         </div>
+      </div>
+    </div>
+
+
+        <div class="site-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 text-center">
+            <div class="site-section-title">
+              <h2>Our Blog</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">{% for i in blogs %}
+          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+            <a href="#"><img src="{{i.pic_of_pro | safe }}" alt="Image" class="img-fluid" style="height:15em;"></a>
+            <div class="p-4 bg-white">
+              <span class="d-block text-secondary small text-uppercase"></span>
+              <h2 class="h5 text-black mb-3"><a href="#">{{i.subject}}</a></h2>
+              <p align="justify">{{i.Desc}}</p>
+            </div>
+          </div>{% endfor %}
+        </div>
+        
       </div>
     </div>
 
@@ -430,10 +620,7 @@
               <p><span class="read-more" onMouseOver="show_sidebar()" onMouseOut="hide_sidebar()">Learn More</span></p>
             </a>
           </div>
-          <!--<div id="sidebar" class="col-md-6 col-lg-2 mb-4"  onMouseOver="show_sidebar()" onMouseOut="hide_sidebar()" style="margin-left:0px;">
-  
-                      <div id="sidebar">some thing</div>
-                    </div>-->
+          
           <div class="col-md-6 col-lg-4 mb-4">
             <a href="/properties/" class="service text-center border rounded">
               <span class="icon flaticon-camera"></span>
@@ -443,30 +630,7 @@
           </div>
 
 
-<!--
 
-          <div class="col-md-6 col-lg-4 mb-4">
-            <a href="#" class="service text-center border rounded">
-              <span class="icon flaticon-house"></span>
-              <h2 class="service-heading">Research Subburbs</h2>
-              <p><span class="read-more">Learn More</span></p>
-               
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <a href="#" class="service text-center border rounded">
-              <span class="icon flaticon-sold"></span>
-              <h2 class="service-heading">Sold Houses</h2>
-              <p><span class="read-more">Learn More</span></p>
-            </a>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4">
-            <a href="#" class="service text-center border rounded">
-              <span class="icon flaticon-camera"></span>
-              <h2 class="service-heading">Security Priority</h2>
-              <p><span class="read-more">Learn More</span></p>
-            </a>
-          </div>-->
         </div>
       </div>
     </div>
@@ -478,28 +642,7 @@
 
 
 
-    <div class="site-section bg-light">
-      <div class="container">
-        <div class="row justify-content-center mb-5">
-          <div class="col-md-7 text-center">
-            <div class="site-section-title">
-              <h2>Our Blog</h2>
-            </div>
-          </div>
-        </div>
-        <div class="row">{% for i in blogs %}
-          <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-            <a href="#"><img src="{{i.pic_of_pro | safe }}" alt="Image" class="img-fluid"></a>
-            <div class="p-4 bg-white">
-              <span class="d-block text-secondary small text-uppercase"></span>
-              <h2 class="h5 text-black mb-3"><a href="#">{{i.subject}}</a></h2>
-              <p>{{i.Desc}}</p>
-            </div>
-          </div>{% endfor %}
-        </div>
-        
-      </div>
-    </div>
+
 
     
   <div class="site-section" style="margin-top:0px;padding-top:0px;">
@@ -517,7 +660,7 @@
         {% for i in obj %}
           <div class="slide-item">
             <div class="team-member text-center">
-              <img src="{{i.agentpic.url}}" alt="Image" class="img-fluid mb-4 w-50 rounded-circle mx-auto">
+              <img src="{{i.agentpic_is_aadharcard.url}}" alt="Image" class="img-fluid mb-4 w-50 rounded-circle mx-auto">
               <div class="text p-3">
                 <h2 class="mb-2 font-weight-light text-black h4">{{i.name}}</h2>
                 <span class="d-block mb-3 text-white-opacity-05">Shriraj Company's Agent</span>
@@ -575,16 +718,18 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\index\">Home</a></li>
+                  <li><a href="\index\">Home</a></li> 
+                  <li><a href="\blog\">Blog</a></li>
+                  <li><a href="\about\">About Us</a></li>
                   
-                  <li><a href="\properties\">Properties</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\about\">About Us</a></li>
+                <li><a href="\contact\">Contact Us</a></li>  
+                 <li><a href="\showdocument\">Documents</a></li>
                  
-                  <li><a href="\contact\">Contact Us</a></li>
+                  
                  
                 </ul>
               </div>
@@ -599,25 +744,19 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="">Registery</a></li>
+                  <li><a href="/properties/">All Properties</a></li>
                   
-                  <li><a href="">Map approval</a></li>
-                  <li><a href="">Diversion </a></li>
-                  <li><a href="">Demarcation, Authentication</a></li>
-                  <li><a href="">Layout</a></li>
-                  <li><a href="">TNC getting </a></li>
-                  <li><a href="">Map design</a></li>
-                  <li><a href="">Laver</a></li>
+                  <li><a href="/mapaproval/">Map approval</a></li>
+                  <li><a href="/matarial/">Material</a></li>
+                  <li><a href="/matarial/">Laver</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                 
-                 
-                  <li><a href="">Contractor</a></li>
-                  <li><a href="">Material</a></li>
-                  <li><a href="">Finance </a></li>
-                  <li><a href="">Any one flats every work</a></li>
+                  <li><a href="/loan/">Finance</a></li>
+                  <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+                  <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+                  <li><a href="/properties/?cname=Residency"">Residency</a></li> 
                 </ul>
               </div>
             </div>
@@ -637,7 +776,7 @@
                  <a href="https://www.linkedin.com/in/khemraj-bakrey-067a4a1a6" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                  <a href="https://t.me/shrirajproperty" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
                  <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
-
+                  
                 </div>
 
             
@@ -696,6 +835,22 @@
 
   });
 </script>
+<!--   popup ########################################################   -->
+ <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#popupmainto').css('display','block');},50);
+
+  });
+</script>
+  <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#call').css('display','block');},50);
+
+  });
+</script>
+
     
   </body>
 </html>

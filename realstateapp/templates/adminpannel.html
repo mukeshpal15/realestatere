@@ -40,6 +40,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/utillogin.css' %}">
    <link rel="stylesheet" type="text/css" href="{% static 'css/mainlogin.css' %}">
   <!--==========ENDLOGIN=========================================================================-->  
+
+      <style>
+
+
+@media screen and (min-width: 601px) {
+  .lo {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lo {
+    font-size: 12px;
+  }
+}
+</style>
   </head>
   <body>
   
@@ -79,8 +101,8 @@
     <div class="site-navbar">
         <div class="container py-1">
           <div class="row align-items-center">
-            <div class="col-8 col-md-8 col-lg-4">
-              <h1><a href="\index\" class="h5 text-blue" style="font-size:25px;"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong> Shri Raj Property</strong></a></h1> 
+            <div class="col-8 col-md-8 col-lg-4" style="padding-right: 0px;">
+              <h1><a href="\index\" class="h5 text-blue"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong class="lo">Shri Raj Property</strong></a></h1> 
             </div>
             <div class="col-4 col-md-4 col-lg-8">
               <nav class="site-navigation text-right text-md-right" role="navigation">
@@ -88,6 +110,11 @@
                 <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
 
                 <ul class="site-menu js-clone-nav d-none d-lg-block">
+               
+                <li>
+                    <a href="\adminchangepassword\">Change Password</a>
+                  </li>
+
                   <li>
                     <a href="\adminlogout\">Logout</a>
                   </li>
@@ -114,58 +141,127 @@
     </div>
 
     <div class="site-section">
-      <div class="container">
+      <div class="container-fuide">
         <div class="row">
-          
-          <div style="margin-right:10px;" class="column">
+
+          <div style="margin-right:1px; margin-bottom:10px;" class="col-lg-2">
+            
+              
+            <a href="/banner/">  <input type="submit" value="Banner Image " class="login100-form-btn w3-hover-black" style="background-color:#red;"></a>
+          </div>
+          {% if b == h %}
+
+          {% else %}
+          <div style="margin-right:1px; margin-bottom:10px; " class="col-lg-2">
+            <form action="/addadmin/" method="POST">
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Add Admin" class="login100-form-btn w3-hover-black" style="background-color:red;">
+            </form>
+          </div>
+          {% endif %}
+          <div style="margin-right:1px; margin-bottom:10px;" class="col-lg-2">
             <form action="/openaddproperty/" method="POST">
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Add Property" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
             </form>
           </div>
 
-          <div style="margin-right:10px;" class="column">
+          <div style="margin-right:1px; margin-bottom:10px;" class="col-lg-2" >
             <form action="/openaddpropertycategory/" method="POST">
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Add Property Category" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
             </form>
           </div>
 
-          <div style="margin-right:10px;" class="column">
+          <div style="margin-right:1px; margin-bottom:10px;" class="col-lg-2">
             <form action="/openaddpropertyimages/" method="POST">
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Add Property Images" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
             </form>
           </div>
-        </div>
-        <div class="row" >
-          <div style="margin:10px;" class="column">
+
+          <div style="margin-right:1px; margin-bottom:10px;" class="col-lg-2">
+            <form action="/openaddpropertyvideo/" method="POST">
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Add Property Video" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
+          </div>
+
+          <div style="margin:1px; " class="col-lg-2">
             <form action="/agentdata/" method="POST">
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Agents Information" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
             </form>
           </div>
 
-          <div class="column" style="margin:10px;">
+          <div style="margin:1px; " class="col-lg-2">
+            <form action="/userdata/" method="POST">
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Users Information" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
+          </div>
+
+<!--        </div>
+        <div class="row" > -->
+          
+        
+      
+          <div class="col-lg-2" style="margin:10px;">
             <form action="/blog_page/" method="POST">
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Post Blog" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
            </form>
           </div>
-          <div class="column" style="margin:10px;">
+          <div class="col-lg-2" style="margin:10px;">
+            <form action="/openadddocuments/">{% csrf_token %}
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Add Document" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+           </form>
+           </div>
+          <div class="col-lg-2" style="margin:10px;">
             <form action="/allblogs_data/" method="POST">{% csrf_token %}
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="View AllBlogs" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
            </form>
-           <div class="row" >
-           <div style="margin:10px;" class="column">
+           </div>
+           <div  class="col-lg-2" style="margin:10px;" style="margin:10px;">
             <form action="/Orderdetail/" method="POST">{% csrf_token %}
               <input type="hidden" name="pass" value="1234">
               <input type="submit" value="Order Details" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
             </form>
           </div>
+          <div class="col-lg-2" style="margin:10px;" style="margin:10px;">
+            <form action="/addplot/" method="POST">{% csrf_token %}
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="add Plot/Farm/Hall/Shop" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
           </div>
-</div>
+
+          <div class="col-lg-3" style="margin:10px;" style="margin:10px;">
+            <form action="/dataofplot/" method="POST">{% csrf_token %}
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Data of Plot/Farm/Hall/Shop" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
+          </div>
+
+          <div class="col-lg-2" style="margin:10px;" style="margin:10px;">
+            <form action="/Mapaproved/" method="POST">{% csrf_token %}
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Order of mapaproval" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
+          </div>
+
+          <div class="col-lg-2" style="margin:10px;" style="margin:10px;">
+            <form action="/testimonial/" method="POST">{% csrf_token %}
+              <input type="hidden" name="pass" value="1234">
+              <input type="submit" value="Add Testimonials" class="login100-form-btn w3-hover-black" style="background-color:#0693D8;">
+            </form>
+          </div>
+
+
+
+          </div>
+        </div>
 
 
       </div>
@@ -192,16 +288,18 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\index\">Home</a></li>
+                  <li><a href="\index\">Home</a></li> 
+                  <li><a href="\blog\">Blog</a></li>
+                  <li><a href="\about\">About Us</a></li>
                   
-                  <li><a href="\properties\">Properties</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\about\">About Us</a></li>
+                <li><a href="\contact\">Contact Us</a></li>  
+                 <li><a href="\showdocument\">Documents</a></li>
                  
-                  <li><a href="\contact\">Contact Us</a></li>
+                  
                  
                 </ul>
               </div>
@@ -216,25 +314,19 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="">Registery</a></li>
+                  <li><a href="/properties/">All Properties</a></li>
                   
-                  <li><a href="">Map approval</a></li>
-                  <li><a href="">Diversion </a></li>
-                  <li><a href="">Demarcation, Authentication</a></li>
-                  <li><a href="">Layout</a></li>
-                  <li><a href="">TNC getting </a></li>
-                  <li><a href="">Map design</a></li>
-                  <li><a href="">Laver</a></li>
+                  <li><a href="/mapaproval/">Map approval</a></li>
+                  <li><a href="/matarial/">Material</a></li>
+                  <li><a href="/matarial/">Laver</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  
-                 
-                  <li><a href="">Contractor</a></li>
-                  <li><a href="">Material</a></li>
-                  <li><a href="">Finance </a></li>
-                  <li><a href="">Any one flats every work</a></li>
+                  <li><a href="/loan/">Finance</a></li>
+                  <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+                  <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+                  <li><a href="/properties/?cname=Residency"">Residency</a></li> 
                 </ul>
               </div>
             </div>
@@ -254,6 +346,7 @@
                  <a href="https://www.linkedin.com/in/khemraj-bakrey-067a4a1a6" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                  <a href="https://t.me/shrirajproperty" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
                  <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
+                 
 
                 </div>
 

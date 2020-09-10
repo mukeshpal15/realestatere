@@ -1,0 +1,339 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Shri Raj Property &mdash; MY ORDERS </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'w3.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Roboto+Mono:300,400,500"> 
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mediaelementplayer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fl-bigmug-line.css' %}">
+    
+  
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+
+
+@media screen and (min-width: 601px) {
+  .lo {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lo {
+    font-size: 12px;
+  }
+}
+</style>
+  </head>
+  <style type="text/css">
+  /* The grid: Three equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 50px;
+      text-align: center;
+      font-size: 25px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .containerTab {
+      padding: 20px;
+      color: white;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Closable button inside the image */
+    .closebtn {
+      float: right;
+      color: white;
+      font-size: 35px;
+      cursor: pointer;
+    }
+  </style>
+
+  <body style="height:100%;background-size:100% 100%;background-image:url({% static 'images\myaccountbackground.jpg' %});">
+  
+  <div class="site-loader"></div>
+  
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+    
+    <div class="border-bottom bg-white top-bar">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-6 col-md-6">
+            <p class="mb-0">
+              <a href="tel:07000596002" class="mr-3"><span class="text-black fl-bigmug-line-phone351"></span> <span class="d-none d-md-inline-block ml-2">+917000596002</span></a>
+              <a href="mailto:shrirajproperty00@gmail.com"><span class="text-black fl-bigmug-line-email64"></span> <span class="d-none d-md-inline-block ml-2">shrirajproperty00@gmail.com
+                </span>
+              </a>
+            </p>  
+          </div>
+          <div class="col-6 col-md-6 text-right">
+          <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="mr-3"><span ><img style="width:25px; height:25px; " src="{% static 'images/youtube1.png' %}"></span></a>
+            <a href="https://wa.me/917000596002?text=Hello Sir" class="mr-3" ><span  style="color:green; "><img  style="width:23px; height:25px; " src="{% static 'images/what2.png' %}"></span></a>
+            <a href="https://t.me/shrirajproperty" class="mr-3"><span ><img style="width:35px; height:35px; " src="{% static 'images/telegram.png' %}"></span></a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="site-navbar">
+        <div class="container py-1">
+          <div class="row align-items-center">
+            <div class="col-8 col-md-8 col-lg-4" style="padding-right: 0px;">
+              <h1><a href="\index\" class="h5 text-blue"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong class="lo">Shri Raj Property</strong></a></h1>
+            </div>
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-right text-md-right" role="navigation">
+
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
+
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li>
+                    <a href="\index\">Home</a>
+                  </li>
+                  <li><a href="/openuserorder/" class="active">My Orders</a></li>
+                  <li><a class="w3-bar-item w3-button" style="background-color:orange;color:white;padding-right:10px;font-weight:bold;" href="\Log\">Logout</a></li>
+                </ul>
+              </nav>
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-5" style="background-image:url({% static 'images/orangeback.jpg' %});">
+      <center>
+      <h1 style="color:black;margin-left:700px;font-weight:bold;padding-bottom:48px;">MY ORDERS</h1>
+      </center>
+    </div>
+    <div class="site-section site-section-sm">
+      <div class="container">
+        <div class="row align-items-center">
+          
+
+
+          <center style="width:30vw;">
+         <div class="w3-card-4" style="width:30vw;border-radius:20px;margin-top:80px;">
+         <form action="http://shrirajco.com/txndata/" method="post" name="paytm">
+             
+              <input type="hidden" name="odid" value="{{response.ORDERID}}">
+              <input type="hidden" name="txnid" value="{{response.TXNID}}">
+              <input type="hidden" name="sted" value="{{response.STATUS}}">
+              <input type="hidden" name="amnt" value="{{response.TXNAMOUNT}}">
+
+                
+          </form>
+         <table>
+           <tr>
+                <th>payment status</th>
+                <th>txn</th>
+           </tr>
+          
+           <tr>
+             <td>{{ response.BANKTXNID }}</td>
+             
+             <td>{{ response.STATUS }}</td>
+           </tr>
+           
+         </table>
+         
+
+            <div class="w3-container w3-black" style="padding-top:10px;padding-bottom:10px;border-radius:20px;">
+            <h2>Payment Information </h2>
+            </div>
+            {{response.ORDERID}}
+              {% if response.RESPCODE == '01' %}
+                ORDER SUCCESS
+              
+
+
+                  <button class="w3-button w3-green w3-hover-black" style="font-size:35px;border-radius:20px;margin-top:10px;margin-bottom:20px;"><i class="fa fa-check"></i> Payment Successful</button>
+                {% else %}
+
+                <button class="w3-button w3-green w3-hover-black" style="font-size:35px;border-radius:20px;margin-top:10px;margin-bottom:20px;"><i class="fa fa-check"></i> Payment Failure</button>
+              {% endif %}
+               </form>
+
+            </div>
+         </center>
+          
+
+          
+          </div>
+        </div>
+      </div>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+         
+            <div class="mb-5">
+              <h3 class="footer-heading mb-4">About  Shri Raj Property</h3>
+              <p>It is an Indian property portal, which provides residential and commercial Real Estate information. The website started in 2020 by Funtouch IT Solution Pvt. Ltd, it's a platform where buyers and sellers can exchange information.</p>
+            </div>
+
+           
+            
+          </div>
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">Navigations</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="\index\">Home</a></li> 
+                  <li><a href="\blog\">Blog</a></li>
+                  <li><a href="\about\">About Us</a></li>
+                  
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                <li><a href="\contact\">Contact Us</a></li>  
+                 <li><a href="\showdocument\">Documents</a></li>
+                 
+                  
+                 
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+           <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <h3 class="footer-heading mb-4">services</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <h3 class="footer-heading mb-4">services</h3>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="/properties/">All Properties</a></li>
+                  
+                  <li><a href="/mapaproval/">Map approval</a></li>
+                  <li><a href="/matarial/">Material</a></li>
+                  <li><a href="/matarial/">Laver</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="/loan/">Finance</a></li>
+                  <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+                  <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+                  <li><a href="/properties/?cname=Residency"">Residency</a></li> 
+                </ul>
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <h3 class="footer-heading mb-4">Follow Us</h3>
+
+                <div>
+                  <a href="https://www.facebook.com/Shri-Raj-Property-Solvation-102741251470674/" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                  <a href="https://www.instagram.com/p/CBAqSCXl83a/?igshid=s95z5aqdp52m" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                  <a href="https://twitter.com/ShriRajPropert1?s=08" class="pl-3 pr-3"><span class="icon-twitter"></span></a> 
+                  
+                 <a href="https://www.linkedin.com/in/khemraj-bakrey-067a4a1a6" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                 <a href="https://t.me/shrirajproperty" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
+                 <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
+                 
+
+                </div>
+
+            
+
+          </div>
+          
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;</script><script>document.write(new Date().getFullYear());</script> All rights reserved | by <a href="https://funtouchit.com" target="_blank" >Funtouch IT Solution Pvt Ltd.</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'js/jquery-ui.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'js/mediaelement-and-player.min.js' %}"></script>
+  <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+  <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/aos.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+ <script type="text/javascript">
+  // Hide all elements with class="containerTab", except for the one that matches the clickable grid column
+  function openTab(tabName) {
+    var i, x;
+    x = document.getElementsByClassName("containerTab");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    document.getElementById(tabName).style.display = "block";
+  }
+  </script>   
+  <script>
+document.paytm.submit()
+</script>
+  </body>
+</html>

@@ -1,5 +1,19 @@
 from realstateapp.models import *
 
+def popup(request):
+	try:
+		if 8==request.session['pop']:
+			return 8
+		else:
+			return 0
+	except:
+		return 0
+
+	
+
+
+
+
 def GetPropertyID():
 	obj=PropertyData.objects.all()
 	lt=[]
@@ -17,6 +31,12 @@ def GetPropertyName(pid):
 	return n
 def GetPropertyImageCount(pid):
 	obj=PropertyImagesData.objects.filter(Property_ID=pid)
+	count=0
+	for x in obj:
+		count=count+1
+	return str(count)
+def GetPropertyVideoCount(pid):
+	obj=PropertyVideo.objects.filter(Property_ID=pid)
 	count=0
 	for x in obj:
 		count=count+1
@@ -44,6 +64,30 @@ def GetPropertyImageData():
 			'image_count':c}
 		lt.append(dic)
 	return lt
+
+def GetPropertyVideoData():
+	obj=PropertyVideo.objects.all()
+	lt=[]
+	dic={}
+	pid=[]
+	pname=[]
+	pcount=[]
+	for x in obj:
+		pid.append(x.Property_ID)
+	for x in obj:
+		pname.append(GetPropertyName(x.Property_ID))
+	for x in obj:
+		pcount.append(GetPropertyVideoCount(x.Property_ID))
+		
+	pid=list(set(pid))
+	pname=list(set(pname))
+	pcount=list(set(pcount))
+	for (a,b,c) in zip(pid,pname,pcount):
+		dic={'property_id':a,
+			'property_name':b,
+			'video_count':c}
+		lt.append(dic)
+	return lt
 def GetPropertyCategoryData():
 	obj=PropertyCategoryData.objects.all()
 	dic={}
@@ -54,6 +98,8 @@ def GetPropertyCategoryData():
 			'cimage':x.Category_Image.url}
 		lt.append(dic)
 	return lt
+
+
 def GetAllPropertyData():
 	obj=PropertyData.objects.all()
 	dic={}
@@ -90,6 +136,7 @@ def GetPropertyThumbData(category):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -104,35 +151,75 @@ def GetPropertyThumbData(category):
 	return lt
 
 
-def GetPropertyData(pid):
+def GetPropertyData(request, pid):
 	obj=PropertyData.objects.filter(Property_ID=pid)
 	dic={}
-	for x in obj:
-		dic={
-		'id':x.Property_ID,
-		'name':x.Property_Name,
-		'price':x.Property_Price,
-		'about':x.Property_About,
-		'address':x.Property_Address,
-		'area':x.Property_Area,
-		'beds':x.Property_Beds,
-		'baths':x.Property_Baths,
-		'garages':x.Property_Garages,
-		'category':x.Property_Category,
-		'builtyear':x.Property_BuiltYear,
-		'for':x.Property_status,
-		'location':x.Property_location,
-		'pricepersqft':str(float(x.Property_Price)/float(x.Property_Area))
-		}
-		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
-		lt=[]
-		for y in obj1:
-			lt.append(y.Property_Image.url)
-		dic.update({'image':lt})
-		for y in obj1:
-			dic.update({'coverimage':y.Property_Image.url})
-			break
-	return dic
+	try:
+		if agent_account.objects.filter(agent_id = request.session['agent_id']):
+			for x in obj:
+				dic={
+				'id':x.Property_ID,
+				'name':x.Property_Name,
+				'price':x.Property_Price,
+				'about':x.Property_About,
+				'address':x.Property_Address,
+				'area':x.Property_Area,
+				'across':x.Property_across,
+				'beds':x.Property_Beds,
+				'baths':x.Property_Baths,
+				'garages':x.Property_Garages,
+				'category':x.Property_Category,
+				'builtyear':x.Property_BuiltYear,
+				'for':x.Property_status,
+				'location':x.Property_location,
+				'pricepersqft':str(float(x.Property_Price)/float(x.Property_Area)),
+				}
+				obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+				obj2=PropertyVideo.objects.filter(Property_ID=x.Property_ID)
+				lt=[]
+				lt2=[]
+				for y in obj1:
+					lt.append(y.Property_Image.url)
+				dic.update({'image':lt})
+				for y2 in obj2:
+					lt2.append(y2.property_video)
+				dic.update({'video':lt2})
+				for y in obj1:
+					dic.update({'coverimage':y.Property_Image.url})
+					break
+			return dic
+	except:
+		for x in obj:
+			dic={
+			'id':x.Property_ID,
+			'name':x.Property_Name,
+			'price':x.Property_Price,
+			'about':x.Property_About,
+			'address':x.Property_Address,
+			'area':x.Property_Area,
+			'beds':x.Property_Beds,
+			'baths':x.Property_Baths,
+			'garages':x.Property_Garages,
+			'category':x.Property_Category,
+			'builtyear':x.Property_BuiltYear,
+			'for':x.Property_status,
+			'location':x.Property_location,
+			'pricepersqft':str(float(x.Property_Price)/float(x.Property_Area)),
+			}
+			obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+			obj2=PropertyVideo.objects.filter(Property_ID=x.Property_ID)
+			lt=[]
+			lt2=[]
+			for y in obj1:
+				lt.append(y.Property_Image.url)
+			dic.update({'image':lt})
+			for y2 in obj2:
+				lt2.append(y2.property_video)
+			dic.update({'video':lt2})
+			for y in obj1:
+				dic.update({'coverimage':y.Property_Image.url})
+				break
+			return dic
 
 
 def getagentinfo(agent_id):
@@ -140,12 +227,16 @@ def getagentinfo(agent_id):
 	obj=agent_account.objects.filter(agent_id=agent_id)
 	for i in obj:
 		dic={
+			'agentid':i.agent_id,
 			'name':i.name,
 			'email': i.email,
 			'address':i.address,
 			'city':i.city,
 			'phone': i.phone,
-			'pic': i.agentpic.url
+			'aadharno':i.aadhar,
+			'aadhar': i.agentpic.url,
+			'pic':i.agentpic_is_aadharcard.url,
+			'post':i.Post
 		}
 		break
 	return dic
@@ -200,7 +291,7 @@ def GetUserData(email):
 			'address':x.address,
 			'city':x.city,
 			'phone':x.phone,
-			'userpic':x.userpic.url,
+			'pic':x.userpic.url,
 
 		}
 		break
@@ -218,7 +309,7 @@ def GetUserData2(uid):
 			'address':x.address,
 			'city':x.city,
 			'phone':x.phone,
-			'userpic':x.userpic.url,
+			'pic':x.userpic.url,
 			
 		}
 		break
@@ -236,34 +327,115 @@ def GetagentData2(uid):
 			'address':x.address,
 			'city':x.city,
 			'phone':x.phone,
-			'pic':x.agentpic.url,
+			'aadhar':x.agentpic.url,
+			'pic':x.agentpic_is_aadharcard.url,
+
 		}
 		break
 	return dic
+
+def GetagentData3(uid):
+	dic1={}
+	lt=[]
+	obj=agent_account.objects.filter(agent_id=uid)
+	dic={}
+	for x in obj:
+		dic={
+			'userid':x.agent_id,
+			'name':x.name,
+			'gender':x.gender,
+			'email':x.email,
+			'address':x.address,
+			'city':x.city,
+			'phone':x.phone,
+			'aadhar':x.agentpic.url,
+			'pic':x.agentpic_is_aadharcard.url,
+			'Aadharno':x.aadhar,
+			'fb':x.facebook,
+			'tw':x.twitter,
+			'ln':x.linkedin,
+			'status':x.status,
+			'post':x.Post
+		}
+		break
+	sub=bankaccount.objects.filter(agent_id=uid)
+	for i in sub:
+		dic.update({
+			'accountholder':i.accountholdername,
+			'checkpic':i.checkpic.url,
+			'bankname':i.bankname,
+			'accountnumber':i.accountno,
+			'ifsc':i.IFSC
+			})
+	od=OrderData.objects.filter(Buyer_ID=uid)
+	for i in od:
+		dic1={
+			'Order_ID':i.Order_ID,
+			'Order_Date':i.Order_Date,
+			'Property_ID':i.Property_ID,
+			'Property_Name':i.Property_Name,
+			'Buyer_ID':i.Buyer_ID,
+			'Payment_ID':i.Payment_ID,
+			'Order_Status':i.Order_Status,
+			'Total_Amount':i.Total_Amount,
+			'Amount_to_Pay':i.Amount_to_Pay
+		}
+		pt=PropertyImagesData.objects.filter(Property_ID=i.Property_ID)
+		for j in pt:
+			dic1.update({'image':j.Property_Image.url})
+		lt.append(dic1)
+
+	 
+	dic.update({'od':lt})
+
+	return dic
 ##################################search bar#######################################
-def allPropertyDataforproperty():
+def allPropertyDataforproperty(request):
 	obj=PropertyData.objects.all()
 	dic={}
 	lt=[]
-	for x in obj:
-		dic={
-		'id':x.Property_ID,
-		'name':x.Property_Name,
-		'price':x.Property_Price,
-		'address':x.Property_Address,
-		'area':x.Property_Area,
-		'beds':x.Property_Beds,
-		'baths':x.Property_Baths,
-		'garages':x.Property_Garages,
-		'for':x.Property_status,
-		'location':x.Property_location,
-		}
-		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
-		for y in obj1:
-			dic.update({'image':y.Property_Image.url})
-			break
-		lt.append(dic)
-	return lt
+	try:
+		if agent_account.objects.filter(agent_id= request.session['agent_id']):
+			for x in obj:
+				dic={
+				'id':x.Property_ID,
+				'name':x.Property_Name,
+				'price':x.Property_Price,
+				'address':x.Property_Address,
+				'area':x.Property_Area,
+				'across':x.Property_across,
+				'beds':x.Property_Beds,
+				'baths':x.Property_Baths,
+				'garages':x.Property_Garages,
+				'for':x.Property_status,
+				'location':x.Property_location,
+				}
+				obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+				for y in obj1:
+					dic.update({'image':y.Property_Image.url})
+					break
+				lt.append(dic)
+			return lt
+	except:
+		for x in obj:
+			dic={
+			'id':x.Property_ID,
+			'name':x.Property_Name,
+			'price':x.Property_Price,
+			'address':x.Property_Address,
+			'area':x.Property_Area,
+			'beds':x.Property_Beds,
+			'baths':x.Property_Baths,
+			'garages':x.Property_Garages,
+			'for':x.Property_status,
+			'location':x.Property_location,
+			}
+			obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+			for y in obj1:
+				dic.update({'image':y.Property_Image.url})
+				break
+			lt.append(dic)
+		return lt
 
 def allPropertyDataforpropertyarea(area):
 	obj=PropertyData.objects.filter(Property_Area=area)
@@ -276,6 +448,7 @@ def allPropertyDataforpropertyarea(area):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -300,6 +473,7 @@ def allPropertyDataforpropertystatus(status):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -325,6 +499,7 @@ def allPropertyDataforpropertyloaction(loaction):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -348,6 +523,7 @@ def allPropertyDataforpropertybedrooms(bedrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -371,6 +547,7 @@ def allPropertyDataforpropertybathrooms(bathrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -394,6 +571,7 @@ def allPropertyDataforpropertyprice(price):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -421,6 +599,7 @@ def allPropertyDataforpropertyAS(area,status):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -444,6 +623,7 @@ def allPropertyDataforpropertyAL(area,loaction):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -468,6 +648,7 @@ def allPropertyDataforpropertyAB(area,bedrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -491,6 +672,7 @@ def allPropertyDataforpropertyABA(area,bathrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -514,6 +696,7 @@ def allPropertyDataforpropertyAPR(area,price):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -540,6 +723,7 @@ def allPropertyDataforpropertySL(status,loaction):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -564,6 +748,7 @@ def allPropertyDataforpropertySBE(status,bedrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -588,6 +773,7 @@ def allPropertyDataforpropertySBA(status,bathrooms):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -612,6 +798,7 @@ def allPropertyDataforpropertySPR(status,price):
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -636,6 +823,32 @@ def allPropertyDataforpropertyall(area,status,loaction,bedrooms,bathrooms,price)
 		'price':x.Property_Price,
 		'address':x.Property_Address,
 		'area':x.Property_Area,
+		'across':x.Property_across,
+		'beds':x.Property_Beds,
+		'baths':x.Property_Baths,
+		'garages':x.Property_Garages,
+		'for':x.Property_status,
+		'location':x.Property_location
+		}
+		obj1=PropertyImagesData.objects.filter(Property_ID=x.Property_ID)
+		for y in obj1:
+			dic.update({'image':y.Property_Image.url})
+			break
+		lt.append(dic)
+	return lt
+
+def allPropertyDataforpropertydiversion(CIR):
+	obj=PropertyData.objects.filter(property_Diversion=CIR)
+	dic={}
+	lt=[]
+	for x in obj:
+		dic={
+		'id':x.Property_ID,
+		'name':x.Property_Name,
+		'price':x.Property_Price,
+		'address':x.Property_Address,
+		'area':x.Property_Area,
+		'across':x.Property_across,
 		'beds':x.Property_Beds,
 		'baths':x.Property_Baths,
 		'garages':x.Property_Garages,
@@ -670,3 +883,22 @@ def GetCartCount(request):
 
 	except:
 		return 0
+#############################################################
+
+import requests
+def sendmsg(ph,msg):
+	try:
+
+		url = "https://www.fast2sms.com/dev/bulk"
+
+		querystring = {"authorization":"pJFuR4e1ZXH7UgOsjdNkmoWwtCEqfYn5v0iS9aVGxKc6M83yThf5ZwkME37e8ODYcXiq0bNrzh4Jx2Pm","sender_id":"SHRIRA","message":msg,"language":"english","route":"p","numbers":ph}
+
+		headers = {
+    				'cache-control': "no-cache"
+					}
+
+		response = requests.request("GET", url, headers=headers, params=querystring)
+
+		print(response.text)
+	except:
+		pass

@@ -25,12 +25,96 @@
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+        <style>
+
+
+@media screen and (min-width: 601px) {
+  .lo {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lo {
+    font-size: 12px;
+  }
+}
+</style>
 
     <style>
 ::placeholder {
   color: white;
   opacity: 1; /* Firefox */
+}
+</style>
+<style type="text/css">
+  .dropdown-large {
+  position: static !important;
+}
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+}
+.dropdown-menu-large > li > ul {
+  padding: 0;
+  margin: 0;
+}
+.dropdown-menu-large > li > ul > li {
+  list-style: none;
+}
+.dropdown-menu-large > li > ul > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333333;
+  white-space: normal;
+}
+.dropdown-menu-large > li ul > li > a:hover,
+.dropdown-menu-large > li ul > li > a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.dropdown-menu-large .disabled > a,
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  color: #999999;
+}
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  cursor: not-allowed;
+}
+.dropdown-menu-large .dropdown-header {
+  color: #428bca;
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+  .dropdown-menu-large > li {
+    margin-bottom: 30px;
+  }
+  .dropdown-menu-large > li:last-child {
+    margin-bottom: 0;
+  }
+  .dropdown-menu-large .dropdown-header {
+    padding: 3px 15px !important;
+  }
 }
 </style>
   </head>
@@ -72,8 +156,8 @@
     <div class="site-navbar">
         <div class="container py-1">
           <div class="row align-items-center">
-            <div class="col-8 col-md-8 col-lg-4">
-              <h1><a href="\index\" class="h5 text-blue" style="font-size:25px;"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong> Shri Raj Property</strong></a></h1>
+            <div class="col-8 col-md-8 col-lg-4" style="padding-right: 0px;">
+              <h1><a href="\index\" class="h5 text-blue"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong class="lo">Shri Raj Property</strong></a></h1>
             </div>
             <div class="col-4 col-md-4 col-lg-8">
               <nav class="site-navigation text-right text-md-right" role="navigation">
@@ -86,15 +170,48 @@
                   </li>
                   
                   <li class="has-children">
-                    <a href="\properties\">All Properties</a>
-                    <ul class="dropdown">
-                      {% for x in cdata %}
-                      <li><a href="/openpropertycategory/?cname={{ x.cname|safe }}">{{ x.cname|safe}}</a></li>
-                      {% endfor %}
-                    </ul>
+                    <a>Services</a>
+                    <ul class="dropdown dropdown-menu-large row" style="width: max-content;">
+                      <li class="col-sm-3">
+                        <ul>
+                
+                <li class="dropdown-header">Finance</li>
+                <li><a href="/loan/">Home Loan</a></li>
+                <li><a href="/loan/">Personal Loan</a></li>
+                <li><a href="/loan/">Mortgage Loan</a></li>
+              
+                </ul></li>
+                </li>
+          <li class="col-sm-3">
+            <ul>
+              <li class="dropdown-header">Material</li>
+              <li><a href="/matarial/">Material</a></li>
+              <li><a href="/matarial/">Laver</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Map</li>
+              <li><a href="/mapaproval/">Map Approval</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Diversion</li>
+              <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+              <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+              <li><a href="/properties/?cname=Residency"">Residency</a></li>
+            </ul>
+          </li>
+          
+          <li class="col-sm-3">
+            <ul>
+                <li class="dropdown-header">Category</li>
+              {% for x in cdata %}
+                <li><a href="/openpropertycategory/?cname={{ x.cname|safe }}">{{ x.cname|safe}}</a></li>
+              {% endfor %}
+              
+            </ul>
+          </li>
+        </ul>
                   </li>
+                  <li> <a href="/properties/">Properties</a></li>
                   <li><a href="\blog\">Blog</a></li>
-                  <li><a href="\about\">About</a></li>
+
                   <li><a href="\contact\">Contact</a></li>
                   
                   {% if b == h %}
@@ -140,12 +257,10 @@
           </div>
           <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="1000">
             <form action="\user_login\" method="POST">{% csrf_token %}
-              <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="text" name="email" placeholder="Email" style="border-radius:15px;" required>
+              <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="text" name="email" placeholder="Email or Phone no." style="border-radius:15px;" required>
               <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="password" name="pass" placeholder="Password" style="border-radius:15px;" required>
 
-              <div style="margin-top:10px; margin-bottom:10px;">
-                <div class="g-recaptcha" data-sitekey="6LfLJAAVAAAAAP7WsuVfUeNtEKaIpoKAI2XsnusV"></div>
-              </div>
+             
 
               <input class="btn btn-outline-primary btn-block py-3 btn-lg" type="submit" value="Logins" style="border-radius:15px;">
             </form>
@@ -177,16 +292,18 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\index\">Home</a></li>
+                  <li><a href="\index\">Home</a></li> 
+                  <li><a href="\blog\">Blog</a></li>
+                  <li><a href="\about\">About Us</a></li>
                   
-                  <li><a href="\properties\">Properties</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\about\">About Us</a></li>
+                <li><a href="\contact\">Contact Us</a></li>  
+                 <li><a href="\showdocument\">Documents</a></li>
                  
-                  <li><a href="\contact\">Contact Us</a></li>
+                  
                  
                 </ul>
               </div>
@@ -201,27 +318,19 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="">Registery</a></li>
+                  <li><a href="/properties/">All Properties</a></li>
                   
-                  <li><a href="">Map approval</a></li>
-                  <li><a href="">Diversion </a></li>
-                  <li><a href="">Demarcation, Authentication</a></li>
-                  <li><a href="">Layout</a></li>
-                   <li><a href="">TNC getting </a></li>
-                  <li><a href="">Map design</a></li>
-                  <li><a href="">Laver</a></li>
+                  <li><a href="/mapaproval/">Map approval</a></li>
+                  <li><a href="/matarial/">Material</a></li>
+                  <li><a href="/matarial/">Laver</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                
-                 <li><a href="">TNC getting </a></li>
-                  <li><a href="">Map design</a></li>
-                  <li><a href="">Laver</a></li>
-                  <li><a href="">Contractor</a></li>
-                  <li><a href="">Material</a></li>
-                  <li><a href="">Finance </a></li>
-                  <li><a href="">Any one flats every work</a></li>
+                  <li><a href="/loan/">Finance</a></li>
+                  <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+                  <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+                  <li><a href="/properties/?cname=Residency"">Residency</a></li> 
                 </ul>
               </div>
             </div>
@@ -241,6 +350,7 @@
                  <a href="https://www.linkedin.com/in/khemraj-bakrey-067a4a1a6" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                  <a href="https://t.me/shrirajproperty" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
                  <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
+                 
 
                 </div>
 

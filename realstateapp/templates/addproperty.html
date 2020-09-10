@@ -4,7 +4,92 @@
   <head>
 
     <title> Shri Raj Property &mdash; Add Property</title>
+      <style type="text/css">
+  .dropdown-large {
+  position: static !important;
+}
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+}
+.dropdown-menu-large > li > ul {
+  padding: 0;
+  margin: 0;
+}
+.dropdown-menu-large > li > ul > li {
+  list-style: none;
+}
+.dropdown-menu-large > li > ul > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333333;
+  white-space: normal;
+}
+.dropdown-menu-large > li ul > li > a:hover,
+.dropdown-menu-large > li ul > li > a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.dropdown-menu-large .disabled > a,
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  color: #999999;
+}
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  cursor: not-allowed;
+}
+.dropdown-menu-large .dropdown-header {
+  color: #428bca;
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+  .dropdown-menu-large > li {
+    margin-bottom: 30px;
+  }
+  .dropdown-menu-large > li:last-child {
+    margin-bottom: 0;
+  }
+  .dropdown-menu-large .dropdown-header {
+    padding: 3px 15px !important;
+  }
+}
 
+</style>
+    <style>
+
+
+@media screen and (min-width: 601px) {
+  .lo {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .lo {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .lo {
+    font-size: 12px;
+  }
+}
+</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'w3.css' %}">
@@ -43,6 +128,17 @@
   <!--==========ENDLOGIN=========================================================================-->  
   </head>
   <body>
+    <!-- ####################################back###########################################################  --> 
+   <section >
+    <div id="back"  style="display: none; position: fixed;width: 0%; margin-right: 0px; z-index: 1001; float:right; height:0px; margin-top:80vh; margin-left:96vw">
+      <div id="qq" style="float:right; margin-right: 0px; ">
+                
+                 <a href="/adminpannel/"><img class="img-responsive" src="{% static 'images/backin.png' %}" style="height:3em; width:3em; margin-right: 0px;" ></a> 
+      </div>
+      </div>
+   
+  </section>
+    <!-- ###############################################################################################  --> 
   
   <div class="site-loader"></div>
   
@@ -80,8 +176,8 @@
     <div class="site-navbar">
         <div class="container py-1">
           <div class="row align-items-center">
-            <div class="col-8 col-md-8 col-lg-4">
-              <h1><a href="\index\" class="h5 text-blue" style="font-size:25px;"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong> Shri Raj Property</strong></a></h1>
+            <div class="col-8 col-md-8 col-lg-4" style="padding-right: 0px;">
+              <h1><a href="\index\" class="h5 text-blue"><img src="{% static 'images/logo.png' %}" style="width:100px;"><strong class="lo">Shri Raj Property</strong></a></h1>
             </div>
             <div class="col-4 col-md-4 col-lg-8">
               <nav class="site-navigation text-right text-md-right" role="navigation">
@@ -131,25 +227,38 @@
                <div class="wrap-input100 validate-input">
                   <input class="input100" type="number" name="price" placeholder="Property Price" required>
                </div>
+               
+
+               <div class="wrap-input100 validate-input">
+                  <input class="input100" type="number" name="area" placeholder="Property Area (in Sq. Ft.)" required>
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <input class="input100" type="number" name="beds" placeholder="Number of Beds in Property" >
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <input class="input100" type="number" name="baths" placeholder="Number of Bathrooms" >
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <input class="input100" type="number" name="garages" placeholder="Number of Garages" >
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <input class="input100" type="text" name="streat" placeholder="Property streat">
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <select class="input100" name="direction">
+                    <option value="EAST"> EAST</option>
+                    <option value="WEST">WEST</option>
+                    <option value="NORTH"> NORTH</option>
+                    <option value="SOUTH">SOUTH</option>
+
+                  </select>
+               </div>
                <div class="wrap-input100 validate-input">
                   <textarea class="input100" type="text" name="address" placeholder="Property Address" style="height:150px;width:100%;" required></textarea>
                </div>
 
                <div class="wrap-input100 validate-input">
                   <input class="input100" type="text" name="city" placeholder="City" required>
-               </div>
-
-               <div class="wrap-input100 validate-input">
-                  <input class="input100" type="number" name="area" placeholder="Property Area (in Sq. Ft.)" required>
-               </div>
-               <div class="wrap-input100 validate-input">
-                  <input class="input100" type="number" name="beds" placeholder="Number of Beds in Property" required>
-               </div>
-               <div class="wrap-input100 validate-input">
-                  <input class="input100" type="number" name="baths" placeholder="Number of Bathrooms" required>
-               </div>
-               <div class="wrap-input100 validate-input">
-                  <input class="input100" type="number" name="garages" placeholder="Number of Garages" required>
                </div>
                <div class="wrap-input100 validate-input">
                   <select class="input100" name="category">
@@ -158,8 +267,21 @@
                     {% endfor %}
                   </select>
                </div>
+
                <div class="wrap-input100 validate-input">
                   <input class="input100" type="text" name="builtyear" placeholder="Year Built" required>
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <select class="input100" name="Diversion">
+                    <option value="Commercial"> Commercial</option>
+                    <option value="Industrial">Industrial</option>
+                    <option value="Commercial"> Residency</option>
+                    <option value="Industrial">Others</option>
+
+                  </select>
+               </div>
+               <div class="wrap-input100 validate-input">
+                  <textarea class="input100" type="text" name="Facilities" placeholder="Facilities" style="height:150px;width:100%;" ></textarea>
                </div>
                <div class="wrap-input100 validate-input">
                   <select class="input100" name="for">
@@ -227,16 +349,18 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\index\">Home</a></li>
+                  <li><a href="\index\">Home</a></li> 
+                  <li><a href="\blog\">Blog</a></li>
+                  <li><a href="\about\">About Us</a></li>
                   
-                  <li><a href="\properties\">Properties</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="\about\">About Us</a></li>
+                <li><a href="\contact\">Contact Us</a></li>  
+                 <li><a href="\showdocument\">Documents</a></li>
                  
-                  <li><a href="\contact\">Contact Us</a></li>
+                  
                  
                 </ul>
               </div>
@@ -251,24 +375,19 @@
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  <li><a href="">Registery</a></li>
-                  <li><a href="">Map approval</a></li>
-                  <li><a href="">Diversion </a></li>
-                  <li><a href="">Demarcation, Authentication</a></li>
-                  <li><a href="">Layout</a></li>
-                  <li><a href="">TNC getting </a></li>
-                  <li><a href="">Map design</a></li>
-                  <li><a href="">Laver</a></li>
+                  <li><a href="/properties/">All Properties</a></li>
+                  
+                  <li><a href="/mapaproval/">Map approval</a></li>
+                  <li><a href="/matarial/">Material</a></li>
+                  <li><a href="/matarial/">Laver</a></li>
                 </ul>
               </div>
               <div class="col-md-6 col-lg-6">
                 <ul class="list-unstyled">
-                  
-                 
-                  <li><a href="">Contractor</a></li>
-                  <li><a href="">Material</a></li>
-                  <li><a href="">Finance </a></li>
-                  <li><a href="">Any one flats every work</a></li>
+                  <li><a href="/loan/">Finance</a></li>
+                  <li><a href="/properties/?cname=Commercial">Commercial</a></li>
+                  <li><a href="/properties/?cname=Industrial">Industrial</a></li>
+                  <li><a href="/properties/?cname=Residency"">Residency</a></li> 
                 </ul>
               </div>
             </div>
@@ -288,6 +407,7 @@
                  <a href="https://www.linkedin.com/in/khemraj-bakrey-067a4a1a6" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
                  <a href="https://t.me/shrirajproperty" class="pl-3 pr-3"><span class="icon-telegram"></span></a>
                  <a href="https://www.youtube.com/channel/UCsTj4mFbAKHOAZwcIt1YrlA" class="pl-3 pr-3"><span class="icon-youtube"></span></a>
+                 
 
                 </div>
 
@@ -343,6 +463,13 @@
   </script>
 <!--===============================================================================================-->
   <script src="{% static 'js/main.js' %}"></script>
+    <script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      $('#back').css('display','block');},50);
+
+  });
+</script>
     
   </body>
 </html>
